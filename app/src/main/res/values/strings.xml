@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Seismometer</string>
+    <string name="title_activity_maps">Earthquake Map</string>
+</resources>
