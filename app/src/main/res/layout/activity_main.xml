@@ -9,65 +9,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.udacity.beginnerandroid.seismometer.MainActivity">
 
-    <TextView
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Strongest Quake within 7 Days:"
-        android:id="@+id/titleStrongestQuake"
-        android:layout_alignParentTop="true"
+        android:id="@+id/quake_list_view"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Magnitude:"
-        android:id="@+id/titleMagnitude"
-        android:layout_marginTop="38dp"
-        android:layout_below="@+id/titleStrongestQuake"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/actualMagnitude"
-        android:layout_alignTop="@+id/titleMagnitude"
-        android:layout_toRightOf="@+id/titleMagnitude"
-        android:layout_toEndOf="@+id/titleMagnitude"
-        android:paddingLeft="16dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Location:"
-        android:id="@+id/titleLocation"
-        android:layout_marginTop="36dp"
-        android:layout_below="@+id/titleMagnitude"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/actualDescription"
-        android:layout_below="@+id/titleLocation"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Run Query"
-        android:id="@+id/runQuery"
-        android:layout_below="@+id/actualDescription"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="106dp" />
 </RelativeLayout>

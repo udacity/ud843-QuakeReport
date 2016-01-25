@@ -6,12 +6,17 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.udacity.beginnerandroid.seismometer.Model.Feature;
 import com.udacity.beginnerandroid.seismometer.Util.ParsingUtils;
+
+import org.json.JSONArray;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,34 +24,44 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "SEISMOMETER";
-    private TextView mMagnitudeView;
-    private TextView mPlaceView;
-    private Button mRunQueryButton;
+
+    private FeatureAdapter mFeatureAdapter;
+    private static final int MAX_QUAKE_LIMIT = 20;
+
+    private ArrayList<Feature> mFeatureList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mMagnitudeView = (TextView) findViewById(R.id.actualMagnitude);
-        mPlaceView = (TextView) findViewById(R.id.actualDescription);
+        // initialize Feature Array
+        mFeatureList = new ArrayList<Feature>();
+        for(int i = 0; i < MAX_QUAKE_LIMIT; i++) {
+            mFeatureList.add(new Feature(0.0,"Default Place"));
+        }
 
-        mRunQueryButton = (Button) findViewById(R.id.runQuery);
-        mRunQueryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ConnectivityManager connectionManager = (ConnectivityManager)
-                        getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo = connectionManager.getActiveNetworkInfo();
-                if (networkInfo != null && networkInfo.isConnected()) {
-                    String baseUrl = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-01-19&endtime=2016-01-20&limit=10&orderby=magnitude";
-                    new FetchEarthquakeDataTask().execute(baseUrl);
-                }
-            }
-        });
+        // Fetch the {@link LayoutInflater} service so that new views can be created
+        LayoutInflater inflater = (LayoutInflater) getSystemService(
+                Context.LAYOUT_INFLATER_SERVICE);
+
+        ListView list = (ListView) findViewById(R.id.quake_list_view);
+        mFeatureAdapter = new FeatureAdapter(this, inflater, mFeatureList);
+        list.setAdapter(mFeatureAdapter);
+
+        ConnectivityManager connectionManager = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectionManager.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            String baseUrl = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-01-13&endtime=2016-01-20&limit=20&orderby=magnitude";
+            new FetchEarthquakeDataTask().execute(baseUrl);
+        }
     }
 
     private class FetchEarthquakeDataTask extends AsyncTask<String, Void, String> {
@@ -61,9 +76,14 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            Feature earthquake = ParsingUtils.extractFeatureFromJson(result);
-            mMagnitudeView.setText(String.format("%.4f",earthquake.getMagnitude()));
-            mPlaceView.setText(earthquake.getPlace());
+            if(result != null) {
+                mFeatureList = ParsingUtils.extractFeatureArrayFromJson(result, MAX_QUAKE_LIMIT);
+            }
+
+            mFeatureAdapter.clear();
+            for(int i = 0; i < MAX_QUAKE_LIMIT; i++) {
+                mFeatureAdapter.add(mFeatureList.get(i));
+            }
         }
 
         protected String getJSONFromWeb(URL url) {
