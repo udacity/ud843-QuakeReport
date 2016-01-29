@@ -1,7 +1,9 @@
 package com.udacity.beginnerandroid.seismometer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +48,7 @@ public class FeatureAdapter extends ArrayAdapter<Feature> {
         // Bind the data
         viewCache.magnitudeView.setText(String.format("%.4f", earthquakeFeature.getMagnitude()));
         viewCache.placeView.setText(earthquakeFeature.getPlace());
+        viewCache.timeView.setText(earthquakeFeature.getFormattedDate());
 
         viewCache.magnitudeView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +60,6 @@ public class FeatureAdapter extends ArrayAdapter<Feature> {
         viewCache.placeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO
             }
         });
         return result;

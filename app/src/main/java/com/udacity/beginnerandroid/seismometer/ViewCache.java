@@ -23,6 +23,8 @@ public class ViewCache {
      */
     public final TextView placeView;
 
+    public final TextView timeView;
+
     /**
      * Constructs a new {@link ViewCache}.
      *
@@ -31,5 +33,6 @@ public class ViewCache {
     public ViewCache(View view) {
         magnitudeView = (TextView) view.findViewById(R.id.feature_magnitude);
         placeView = (TextView) view.findViewById(R.id.feature_place);
+        timeView = (TextView) view.findViewById(R.id.feature_time);
     }
 }

@@ -33,7 +33,9 @@ public class ParsingUtils {
                             .getJSONObject("properties");
 
                     resultsList.add(new Feature(individualFeature.getDouble("mag"),
-                            individualFeature.getString("place")));
+                            individualFeature.getString("place"),
+                            individualFeature.getLong("time"),
+                            individualFeature.getString("url")));
                 }
             } else {
                 // TODO - featureArraySize is Zero
@@ -59,8 +61,10 @@ public class ParsingUtils {
 
             double magnitude = individualFeature.getDouble("mag");
             String place  = individualFeature.getString("place");
+            long time = individualFeature.getLong("time");
+            String url = individualFeature.getString("url");
 
-            return new Feature(magnitude, place);
+            return new Feature(magnitude, place, time, url);
 
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);

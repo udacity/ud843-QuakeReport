@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -70,6 +71,17 @@ public class MainActivity extends AppCompatActivity {
         ListView list = (ListView) findViewById(R.id.quake_list_view);
         mFeatureAdapter = new FeatureAdapter(this, inflater, mFeatureList);
         list.setAdapter(mFeatureAdapter);
+
+        // TODO - Explain To Students Why We need to Use AdapterView.OnItemClickListener
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Feature feature = mFeatureAdapter.getItem(position);
+                Uri webpage = Uri.parse(feature.getUrl());
+                Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                startActivity(intent);
+            }
+        });
 
         mConnectionManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
