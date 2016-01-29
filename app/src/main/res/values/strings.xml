@@ -1,4 +1,21 @@
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
     <string name="app_name">Seismometer</string>
     <string name="title_activity_maps">Earthquake Map</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_quake_settings_root">Earthquake Settings</string>
+    <string name="summary_quake_settings_root">The follow settings are available to filter the data returned.</string>
+
+    <string name="list_preference_region_title">Region</string>
+    <string name="list_preference_region_key">region</string>
+
+    <string name="settings_units_label_region_world">World</string>
+    <string name="settings_units_label_region_san_francisco">San Francisco</string>
+
+    <string name="list_preference_sort_by_title">Sort By</string>
+    <string name="list_preference_sort_by_key">sort_by</string>
+
+    <string name="settings_units_label_sort_by_mag_des">Magnitude - Descending</string>
+    <string name="settings_units_label_sort_by_mag_asc">Magnitude - Ascending</string>
+    <string name="settings_units_label_sort_by_most_recent">Most Recent</string>
 </resources>

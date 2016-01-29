@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    android:title="@string/title_quake_settings_root"
+    android:summary="@string/summary_quake_settings_root"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:title="@string/list_preference_region_title"
+        android:key="@string/list_preference_region_key"
+        android:defaultValue="@string/settings_units_label_region_world"
+        android:entryValues="@array/settings_regional_values"
+        android:entries="@array/settings_regional_options" />
+
+    <ListPreference
+        android:title="@string/list_preference_sort_by_title"
+        android:key="@string/list_preference_sort_by_key"
+        android:defaultValue="@string/settings_units_label_sort_by_mag_des"
+        android:entryValues="@array/settings_sort_by_values"
+        android:entries="@array/settings_sort_by_options" />
+
+</PreferenceScreen>
