@@ -18,19 +18,26 @@ public class ParsingUtils {
     //JSON related constants
     //final private static String BASE_QUERY_JSON = "query";
 
-    public static ArrayList<Feature> extractFeatureArrayFromJson(String earthquakeJSON, int amount) {
+    public static ArrayList<Feature> extractFeatureArrayFromJson(String earthquakeJSON) {
         try {
             JSONObject baseJsonResponse = new JSONObject(earthquakeJSON);
 
+            int featureArraySize = baseJsonResponse.getJSONArray("features").length();
+
             ArrayList<Feature> resultsList = new ArrayList<Feature>();
 
-            for(int i = 0; i < amount; i++ ) {
-                JSONObject individualFeature = baseJsonResponse.getJSONArray("features")
-                        .getJSONObject(i)
-                        .getJSONObject("properties");
+            if (featureArraySize != 0) {
+                for (int i = 0; i < featureArraySize; i++) {
+                    JSONObject individualFeature = baseJsonResponse.getJSONArray("features")
+                            .getJSONObject(i)
+                            .getJSONObject("properties");
 
-                resultsList.add(new Feature(individualFeature.getDouble("mag"),
-                        individualFeature.getString("place")));
+                    resultsList.add(new Feature(individualFeature.getDouble("mag"),
+                            individualFeature.getString("place")));
+                }
+            } else {
+                // TODO - featureArraySize is Zero
+                // TODO need to respond to this better
             }
 
             return resultsList;

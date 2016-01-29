@@ -9,8 +9,11 @@
     <string name="list_preference_region_title">Region</string>
     <string name="list_preference_region_key">region</string>
 
+    <string name="settings_units_label_region_default">World</string>
     <string name="settings_units_label_region_world">World</string>
     <string name="settings_units_label_region_san_francisco">San Francisco</string>
+    <string name="settings_units_label_region_puerto_vallarta">Puerto Vallarta</string>
+    <string name="settings_units_label_region_marrakesh_morocco">Morocco</string>
 
     <string name="list_preference_sort_by_title">Sort By</string>
     <string name="list_preference_sort_by_key">sort_by</string>
@@ -18,4 +21,10 @@
     <string name="settings_units_label_sort_by_mag_des">Magnitude - Descending</string>
     <string name="settings_units_label_sort_by_mag_asc">Magnitude - Ascending</string>
     <string name="settings_units_label_sort_by_most_recent">Most Recent</string>
+    <string name="settings_units_label_sort_by_least_recent">Least Recent</string>
+
+    <string name="settings_units_value_sort_by_mag_des">magnitude</string>
+    <string name="settings_units_value_sort_by_mag_asc">magnitude-asc</string>
+    <string name="settings_units_value_sort_by_most_recent">time</string>
+    <string name="settings_units_value_sort_by_least_recent">time-asc</string>
 </resources>

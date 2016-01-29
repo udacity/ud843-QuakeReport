@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- these are the options displayed in the UI Dialog -->
     <string-array name="settings_regional_options">
         <item>@string/settings_units_label_region_world</item>
         <item>@string/settings_units_label_region_san_francisco</item>
+        <item>@string/settings_units_label_region_puerto_vallarta</item>
+        <item>@string/settings_units_label_region_marrakesh_morocco</item>
     </string-array>
 
+    <!-- these are values used internally by our code -->
     <string-array name="settings_regional_values">
         <item>@string/settings_units_label_region_world</item>
         <item>@string/settings_units_label_region_san_francisco</item>
+        <item>@string/settings_units_label_region_puerto_vallarta</item>
+        <item>@string/settings_units_label_region_marrakesh_morocco</item>
     </string-array>
 
+    <!-- these are the options displayed in the UI Dialog -->
     <string-array name="settings_sort_by_options">
         <item>@string/settings_units_label_sort_by_mag_des</item>
         <item>@string/settings_units_label_sort_by_mag_asc</item>
         <item>@string/settings_units_label_sort_by_most_recent</item>
+        <item>@string/settings_units_label_sort_by_least_recent</item>
     </string-array>
 
+    <!-- these are values used internally by our code -->
     <string-array name="settings_sort_by_values">
-        <item>@string/settings_units_label_sort_by_mag_des</item>
-        <item>@string/settings_units_label_sort_by_mag_asc</item>
-        <item>@string/settings_units_label_sort_by_most_recent</item>
+        <item>@string/settings_units_value_sort_by_mag_des</item>
+        <item>@string/settings_units_value_sort_by_mag_asc</item>
+        <item>@string/settings_units_value_sort_by_most_recent</item>
+        <item>@string/settings_units_value_sort_by_least_recent</item>
     </string-array>
 </resources>
