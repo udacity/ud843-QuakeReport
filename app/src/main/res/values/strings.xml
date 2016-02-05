@@ -1,5 +1,5 @@
 <resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
-    <string name="app_name">Seismometer</string>
+    <string name="app_name">Earthquakes</string>
     <string name="title_activity_maps">Earthquake Map</string>
 
     <string name="action_settings">Settings</string>
