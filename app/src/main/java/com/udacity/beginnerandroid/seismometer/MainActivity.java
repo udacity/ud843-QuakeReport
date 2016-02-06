@@ -35,7 +35,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -163,6 +165,9 @@ public class MainActivity extends AppCompatActivity {
             if (regionPreference.equals(getString(R.string.settings_units_label_region_default))) {
 
                 // TODO - Need To Calculate Date in Proper Format Based On Current Day
+                Date today = new Date(System.currentTimeMillis());
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String endDate = sdf.format(today);
 
                 builtUri = Uri.parse(EARTHQUAKE_QUERY_BASE_URL).buildUpon()
                         .appendQueryParameter(FORMAT_PARAM, responseFormat)
@@ -170,8 +175,7 @@ public class MainActivity extends AppCompatActivity {
                         .appendQueryParameter(EVENT_TYPE_PARAM, eventType)
                         .appendQueryParameter(ORDER_BY_PARAM, orderByPreference)
                         .appendQueryParameter(MIN_MAGNITUDE_PARAM, "2.0")
-                        .appendQueryParameter(START_TIME_PARAM, "2016-01-21")
-                        .appendQueryParameter(END_TIME_PARAM, "2016-01-28")
+                        .appendQueryParameter(END_TIME_PARAM, endDate)
                         .build();
             } else {
                 builtUri = Uri.parse(EARTHQUAKE_QUERY_BASE_URL).buildUpon()
