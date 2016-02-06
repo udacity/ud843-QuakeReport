@@ -161,6 +161,10 @@ public class MainActivity extends AppCompatActivity {
                     getString(R.string.list_preference_sort_by_key),
                     getString(R.string.settings_units_value_sort_by_mag_des));
 
+            String minMagnitudePreference = sharedPrefs.getString("min_magnitude", "0.0");
+
+            String maxRadiusPreference = sharedPrefs.getString("max_radius", "100");
+
             Uri builtUri;
             if (regionPreference.equals(getString(R.string.settings_units_label_region_default))) {
 
@@ -174,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
                         .appendQueryParameter(LIMIT_PARAM, "50")
                         .appendQueryParameter(EVENT_TYPE_PARAM, eventType)
                         .appendQueryParameter(ORDER_BY_PARAM, orderByPreference)
-                        .appendQueryParameter(MIN_MAGNITUDE_PARAM, "2.0")
+                        .appendQueryParameter(MIN_MAGNITUDE_PARAM, minMagnitudePreference)
                         .appendQueryParameter(END_TIME_PARAM, endDate)
                         .build();
             } else {
@@ -183,12 +187,12 @@ public class MainActivity extends AppCompatActivity {
                         .appendQueryParameter(LIMIT_PARAM, "50")
                         .appendQueryParameter(EVENT_TYPE_PARAM, eventType)
                         .appendQueryParameter(ORDER_BY_PARAM, orderByPreference)
-                        .appendQueryParameter(MIN_MAGNITUDE_PARAM, "2.0")
+                        .appendQueryParameter(MIN_MAGNITUDE_PARAM, minMagnitudePreference)
                         .appendQueryParameter(LATITUDE_PARAM,
                                 Double.toString(mRegionsMap.get(regionPreference).getLatitude()))
                         .appendQueryParameter(LONGITUDE_PARAM,
                                 Double.toString(mRegionsMap.get(regionPreference).getLongitude()))
-                        .appendQueryParameter(MAX_RADIUS_PARAM, "1000")
+                        .appendQueryParameter(MAX_RADIUS_PARAM, maxRadiusPreference)
                         .build();
             }
 
@@ -213,16 +217,21 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             if(result != null) {
                 mFeatureList = ParsingUtils.extractFeatureArrayFromJson(result);
-            }
 
-            mFeatureAdapter.clear();
-            for(int i = 0; i < mFeatureList.size(); i++) {
-                mFeatureAdapter.add(mFeatureList.get(i));
-            }
+                if (mFeatureList != null) {
+                    mFeatureAdapter.clear();
+                    for (int i = 0; i < mFeatureList.size(); i++) {
+                        mFeatureAdapter.add(mFeatureList.get(i));
+                    }
 
-            // Method Chaining Approach to quick Toast to indicate updated data
-            Toast.makeText(getApplicationContext(),
-                    "Data Update Complete", Toast.LENGTH_SHORT).show();
+                    // Method Chaining Approach to quick Toast to indicate updated data
+                    Toast.makeText(getApplicationContext(),
+                            "Data Update Complete", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                            "No Earthquakes Found", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
 
         protected String getJSONFromWeb(URL url) {

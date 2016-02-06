@@ -6,6 +6,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.app.FragmentManager;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -37,6 +38,9 @@ public class SettingsActivity extends AppCompatActivity {
     // TODO: Explain to students why this declaration is static
     public static class SettingsFragment extends PreferenceFragment
             implements Preference.OnPreferenceChangeListener {
+
+        private PreferenceScreen mPreferenceScreen;
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -44,13 +48,18 @@ public class SettingsActivity extends AppCompatActivity {
             // Load the settings_main from an XML resource
             addPreferencesFromResource(R.xml.settings_main);
 
+            // will need a reference to this to add or remove
+            // the Max Radius Preference depending on what is query is selected
+            mPreferenceScreen = getPreferenceScreen();
+
             // For all preferences, attach an OnPreferenceChangeListener so the UI summary can be
             // updated when the preference changes.
             bindPreferenceSummaryToValue(findPreference(
                     getString(R.string.list_preference_region_key)));
             bindPreferenceSummaryToValue(findPreference(
                     getString(R.string.list_preference_sort_by_key)));
-
+            bindPreferenceSummaryToValue(findPreference("min_magnitude"));
+            bindPreferenceSummaryToValue(findPreference("max_radius"));
         }
 
         /**

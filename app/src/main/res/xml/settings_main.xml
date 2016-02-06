@@ -18,4 +18,16 @@
         android:entries="@array/settings_sort_by_options"
         android:entryValues="@array/settings_sort_by_values" />
 
+    <EditTextPreference
+        android:title="Minimum Magnitude"
+        android:key="min_magnitude"
+        android:defaultValue="0.0"
+        android:summary="Show all quakes with magnitude >= the decimal entered here" />
+
+    <EditTextPreference
+        android:title="Within Maximum Radius (km)"
+        android:key="max_radius"
+        android:defaultValue="50"
+        android:summary="Show all quakes within the following radius (km)" />
+
 </PreferenceScreen>
