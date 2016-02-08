@@ -47,7 +47,7 @@ public class FeatureAdapter extends ArrayAdapter<Feature> {
 
         // Bind the data
         viewCache.magnitudeView.setText(String.format("%.4f", earthquakeFeature.getMagnitude()));
-        viewCache.placeView.setText(earthquakeFeature.getPlace());
+        viewCache.placeView.setText(earthquakeFeature.getLocation());
         viewCache.timeView.setText(earthquakeFeature.getFormattedDate());
 
         viewCache.magnitudeView.setOnClickListener(new View.OnClickListener() {
