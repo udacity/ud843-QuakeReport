@@ -63,6 +63,7 @@ public class Feature {
 
     public double getMagnitude() { return mMagnitude; }
     public String getLocation() { return mLocation; }
+    public String getLocationDetails() { return mLocationDetails; }
     public long getTime() { return mTime; }
     public String getUrl() { return mUrl; }
 
