@@ -16,7 +16,8 @@ public class Feature {
     private double mMagnitude;
     private String mLocation;
     private String mLocationDetails;
-    private long mTime;
+    private String mDate;
+    private String mTime;
     private String mUrl;
 
     public Feature(double magnitude,
@@ -45,9 +46,12 @@ public class Feature {
         // http://earthquake.usgs.gov/earthquakes/feed/v1.0/glossary.php#time
         // time is reported in milliseconds from the Epoch
         if (time != 0) {
-            this.mTime = time;
+            // Time Comes In As Unix Time.
+            // Format As a String and Separate Date From Time
+            separateDateFromTime(time);
         } else {
-            this.mTime = 0;
+            this.mDate = "Default Date";
+            this.mTime = "00:00";
         }
 
         if (url != null) {
@@ -64,13 +68,29 @@ public class Feature {
     public double getMagnitude() { return mMagnitude; }
     public String getLocation() { return mLocation; }
     public String getLocationDetails() { return mLocationDetails; }
-    public long getTime() { return mTime; }
+    public String getDate() { return mDate; }
+    public String getTime() { return mTime; }
     public String getUrl() { return mUrl; }
 
-    public String getFormattedDate() {
-        Date date = new Date(this.getTime());
+    private void separateDateFromTime(long time) {
+        // Work With a formatted Date String
+        Date date = new Date(time);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mmZ");
-        return sdf.format(date);
+        String formattedDateFull = sdf.format(date);
+
+        // Use a Regex Pattern To Extract Out Date From Time
+        Pattern p = Pattern.compile("(^\\d{4}-\\d{2}-\\d{2})\\s+(.*$)");
+        Matcher m = p.matcher(formattedDateFull);
+        while (m.find()) { // Find each match in turn; String class can't do this.
+            mDate = m.group(1); // Store Extracted Details Of Earthquake Location
+            mTime = m.group(2); // Store Base Location
+
+            /*// For Debugging Function
+            Log.d("EARTHQUAKES", "Extracted this date: " + mDate);
+            Log.d("EARTHQUAKES", "Extracted this time: " + mTime);
+            */
+        }
+        return;
     }
 
     public String[] extractStringDetails(String description) {
