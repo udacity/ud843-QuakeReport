@@ -97,7 +97,7 @@ public class Feature {
         String[] details = new String[]{"",""};
 
         // Use a Regex Pattern To Extract Out Location Details
-        Pattern p = Pattern.compile("(^.*of)(.*$)");
+        Pattern p = Pattern.compile("(^.*of)\\s+(\\S{1,}.*$)");
         Matcher m = p.matcher(description);
         while (m.find()) { // Find each match in turn; String class can't do this.
             details[0] = m.group(1); // Store Extracted Details Of Earthquake Location
