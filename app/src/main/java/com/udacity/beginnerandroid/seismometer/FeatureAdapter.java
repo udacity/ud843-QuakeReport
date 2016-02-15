@@ -47,8 +47,10 @@ public class FeatureAdapter extends ArrayAdapter<Feature> {
 
         // Bind the data
         viewCache.magnitudeView.setText(String.format("%.1f", earthquakeFeature.getMagnitude()));
-        viewCache.placeView.setText(earthquakeFeature.getLocation());
-        viewCache.timeView.setText(earthquakeFeature.getDate());
+        viewCache.locationView.setText(earthquakeFeature.getLocation());
+        viewCache.locationDetailsView.setText(earthquakeFeature.getLocationDetails());
+        viewCache.dateView.setText(earthquakeFeature.getDate());
+        viewCache.timeView.setText(earthquakeFeature.getTime());
 
         viewCache.magnitudeView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +59,7 @@ public class FeatureAdapter extends ArrayAdapter<Feature> {
             }
         });
 
-        viewCache.placeView.setOnClickListener(new View.OnClickListener() {
+        viewCache.locationView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             }

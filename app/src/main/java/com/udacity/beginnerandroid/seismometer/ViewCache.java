@@ -21,8 +21,9 @@ public class ViewCache {
     /**
      * View that displays the Miwok translation of the word
      */
-    public final TextView placeView;
-
+    public final TextView locationView;
+    public final TextView locationDetailsView;
+    public final TextView dateView;
     public final TextView timeView;
 
     /**
@@ -32,7 +33,9 @@ public class ViewCache {
      */
     public ViewCache(View view) {
         magnitudeView = (TextView) view.findViewById(R.id.feature_magnitude);
-        placeView = (TextView) view.findViewById(R.id.feature_place);
+        locationView = (TextView) view.findViewById(R.id.feature_location);
+        locationDetailsView = (TextView) view.findViewById(R.id.feature_location_details);
+        dateView = (TextView) view.findViewById(R.id.feature_date);
         timeView = (TextView) view.findViewById(R.id.feature_time);
     }
 }
