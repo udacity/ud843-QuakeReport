@@ -37,9 +37,11 @@ public class Feature {
                 this.mLocation = locationParts[1];
             } else {
                 this.mLocation = location;
+                this.mLocationDetails = "Around The";
             }
         } else {
-            this.mLocation = "Default Message, No Data";
+            this.mLocation = "Default Location";
+            this.mLocationDetails ="Default Location Details";
         }
 
         // From USGS Documentation
