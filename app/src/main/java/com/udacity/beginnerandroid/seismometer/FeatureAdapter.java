@@ -1,6 +1,7 @@
 package com.udacity.beginnerandroid.seismometer;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,20 +47,42 @@ public class FeatureAdapter extends ArrayAdapter<Feature> {
         double magnitude = earthquakeFeature.getMagnitude();
         viewCache.magnitudeView.setText(String.format("%.1f", magnitude));
 
-        // Alter the opacity of the circle background depending on the strength of quake
+        // Adjust the color of the circle background depending on the strength of quake
         GradientDrawable backgroundShape = (GradientDrawable) viewCache.magnitudeView.
                 getBackground();
 
-        if (Math.floor(magnitude) <= 2) {
-            backgroundShape.setAlpha(77); // 30 % Opacity on 0 to 255(opaque) scale
-        } else if (Math.floor(magnitude) <= 4) {
-            backgroundShape.setAlpha(128); // 50 % Opacity on 0 to 255(opaque) scale
-        } else if (Math.floor(magnitude) <= 6) {
-            backgroundShape.setAlpha(179); // 70 % Opacity on 0 to 255(opaque) scale
-        } else if (Math.floor(magnitude) <= 8) {
-            backgroundShape.setAlpha(230); // 90 % Opacity on 0 to 255(opaque) scale
-        } else {
-            backgroundShape.setAlpha(255); // 100% Opacity on 0 to 255(opaque) scale
+        switch((int) Math.floor(magnitude)) {
+            case 0:
+            case 1:
+                backgroundShape.setColor(Color.parseColor("#4a7ba7"));
+                break;
+            case 2:
+                backgroundShape.setColor(Color.parseColor("#04b4b3"));
+                break;
+            case 3:
+                backgroundShape.setColor(Color.parseColor("#10cac9"));
+                break;
+            case 4:
+                backgroundShape.setColor(Color.parseColor("#41d7b0"));
+                break;
+            case 5:
+                backgroundShape.setColor(Color.parseColor("#f8cc4f"));
+                break;
+            case 6:
+                backgroundShape.setColor(Color.parseColor("#f89828"));
+                break;
+            case 7:
+                backgroundShape.setColor(Color.parseColor("#ec662a"));
+                break;
+            case 8:
+                backgroundShape.setColor(Color.parseColor("#ec442a"));
+                break;
+            case 9:
+                backgroundShape.setColor(Color.parseColor("#d93218"));
+                break;
+            default:
+                backgroundShape.setColor(Color.parseColor("#c03823"));
+                break;
         }
 
         viewCache.locationView.setText(earthquakeFeature.getLocation());
