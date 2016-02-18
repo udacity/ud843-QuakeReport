@@ -61,10 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
         // initialize Feature Array
         mFeatureList = new ArrayList<Feature>();
-        /* Initialize ArrayList
-        for(int i = 0; i < MAX_QUAKE_LIMIT; i++) {
-            mFeatureList.add(new Feature(0.0,"Default Place"));
-        }*/
 
         // Fetch the {@link LayoutInflater} service so that new views can be created
         LayoutInflater inflater = (LayoutInflater) getSystemService(
@@ -88,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         mConnectionManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         // Initialize a few locations Users can choose from
+        // TODO Add More Useful Cities
         mRegionsMap = new HashMap<String, GeoCoordinate>();
         mRegionsMap.put("San Francisco", new GeoCoordinate(37.7749, -122.4194));
         mRegionsMap.put("Puerto Vallarta", new GeoCoordinate(20.6220, -105.2283));
@@ -168,7 +165,8 @@ public class MainActivity extends AppCompatActivity {
             Uri builtUri;
             if (regionPreference.equals(getString(R.string.settings_units_label_region_default))) {
 
-                // TODO - Need To Calculate Date in Proper Format Based On Current Day
+                // Extract The Current Date From The System Time &
+                // And Use As The endDate parameter to the API
                 Date today = new Date(System.currentTimeMillis());
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String endDate = sdf.format(today);
@@ -196,8 +194,10 @@ public class MainActivity extends AppCompatActivity {
                         .build();
             }
 
-            Log.d(LOG_TAG,"URL BUILT is " + builtUri.toString());
+            // For Debug
+            // Log.d(LOG_TAG,"URL BUILT is " + builtUri.toString());
 
+            // TODO: Start Teaching Students Using A Base URL String
             //String baseUrl = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-01-21&endtime=2016-01-28&limit=20&orderby=magnitude&eventtype=earthquake";
             new FetchEarthquakeDataTask().execute(builtUri.toString());
         }
