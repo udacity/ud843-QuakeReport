@@ -33,8 +33,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+
     private static final String LOG_TAG = "Earthquakes";
     private static final int MAX_QUAKE_LIMIT = 20;
     private FeatureAdapter mFeatureAdapter;
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // initialize Feature Array
-        mFeatureList = new ArrayList<Feature>();
+        mFeatureList = new ArrayList<>();
 
         // Fetch the {@link LayoutInflater} service so that new views can be created
         LayoutInflater inflater = (LayoutInflater) getSystemService(
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize a Few Locations That Users Can Choose From
         // TODO Add More Cities To Cover More Of The Globe, Preferably with Tectonic Activity
-        mRegionsMap = new HashMap<String, GeoCoordinate>();
+        mRegionsMap = new HashMap<>();
         mRegionsMap.put("San Francisco", new GeoCoordinate(37.7749, -122.4194));
         mRegionsMap.put("Puerto Vallarta", new GeoCoordinate(20.6220, -105.2283));
         mRegionsMap.put("Morocco", new GeoCoordinate(31.6333, -8.0000));
@@ -117,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
             // Possible parameters are available at The USGS Earthquake API page, at
             // http://earthquake.usgs.gov/fdsnws/event/1/#parameters
 
+
+            // TODO: Add all these to strings.xml
             // Parameters Common To All Queries
             final String EARTHQUAKE_QUERY_BASE_URL =
                     "http://earthquake.usgs.gov/fdsnws/event/1/query?";
@@ -148,17 +152,20 @@ public class MainActivity extends AppCompatActivity {
                     getString(R.string.list_preference_sort_by_key),
                     getString(R.string.settings_units_value_sort_by_mag_des));
 
+            // TODO: Add these strings to strings.xml
+
             String minMagnitudePreference = sharedPrefs.getString("min_magnitude", "0.0");
 
             String maxRadiusPreference = sharedPrefs.getString("max_radius", "100");
 
             Uri builtUri;
+
             if (regionPreference.equals(getString(R.string.settings_units_label_region_default))) {
 
                 // Extract The Current Date From The System Time &
                 // And Use As The endDate parameter to the API
                 Date today = new Date(System.currentTimeMillis());
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
                 String endDate = sdf.format(today);
 
                 builtUri = Uri.parse(EARTHQUAKE_QUERY_BASE_URL).buildUpon()
@@ -199,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 return getJSONFromWeb(new URL(urls[0]));
             } catch (IOException e) {
-                return "Unable to retrive response JSON from USGS. URL may be invalid";
+                return "Unable to retrieve response JSON from USGS. URL may be invalid";
             }
         }
 
@@ -227,9 +234,9 @@ public class MainActivity extends AppCompatActivity {
 
         protected String getJSONFromWeb(URL url) {
             HttpURLConnection urlConnection = null;
-            BufferedReader reader = null;
+            BufferedReader reader;
 
-            String earthquakeDataJSON = "";
+            String earthquakeDataJSON;
 
             try {
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -238,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Read the input Stream into a String
                 InputStream inputStream = urlConnection.getInputStream();
-                StringBuffer buffer = new StringBuffer();
+                StringBuilder buffer = new StringBuilder();
                 if (inputStream == null) {
                     // Nothing to do.
                     return "";

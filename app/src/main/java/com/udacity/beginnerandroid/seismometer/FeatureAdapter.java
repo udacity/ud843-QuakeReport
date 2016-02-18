@@ -12,9 +12,7 @@ import com.udacity.beginnerandroid.seismometer.Model.Feature;
 
 import java.util.ArrayList;
 
-/**
- * Created by chrislei on 1/21/16.
- */
+
 public class FeatureAdapter extends ArrayAdapter<Feature> {
 
     private Context mContext;
