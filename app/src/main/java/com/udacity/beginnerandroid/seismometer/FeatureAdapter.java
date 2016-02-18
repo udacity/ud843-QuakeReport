@@ -1,10 +1,7 @@
 package com.udacity.beginnerandroid.seismometer;
 
 import android.content.Context;
-import android.content.Intent;
-import android.media.MediaPlayer;
-import android.net.Uri;
-import android.speech.tts.TextToSpeech;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +43,25 @@ public class FeatureAdapter extends ArrayAdapter<Feature> {
         final Feature earthquakeFeature = getItem(position);
 
         // Bind the data
-        viewCache.magnitudeView.setText(String.format("%.1f", earthquakeFeature.getMagnitude()));
+        double magnitude = earthquakeFeature.getMagnitude();
+        viewCache.magnitudeView.setText(String.format("%.1f", magnitude));
+
+        // Alter the opacity of the circle background depending on the strength of quake
+        GradientDrawable backgroundShape = (GradientDrawable) viewCache.magnitudeView.
+                getBackground();
+
+        if (Math.floor(magnitude) <= 2) {
+            backgroundShape.setAlpha(77); // 30 % Opacity on 0 to 255(opaque) scale
+        } else if (Math.floor(magnitude) <= 4) {
+            backgroundShape.setAlpha(128); // 50 % Opacity on 0 to 255(opaque) scale
+        } else if (Math.floor(magnitude) <= 6 ) {
+            backgroundShape.setAlpha(179); // 70 % Opacity on 0 to 255(opaque) scale
+        } else if (Math.floor(magnitude) <= 8 ) {
+            backgroundShape.setAlpha(230); // 90 % Opacity on 0 to 255(opaque) scale
+        } else {
+            backgroundShape.setAlpha(255); // 100% Opacity on 0 to 255(opaque) scale
+        }
+
         viewCache.locationView.setText(earthquakeFeature.getLocation());
         viewCache.locationDetailsView.setText(earthquakeFeature.getLocationDetails());
         viewCache.dateView.setText(earthquakeFeature.getDate());
