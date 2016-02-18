@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         mFeatureAdapter = new FeatureAdapter(this, inflater, mFeatureList);
         list.setAdapter(mFeatureAdapter);
 
-        // TODO - Explain To Students Why We need to Use AdapterView.OnItemClickListener
+        // TODO - Explain To Students Why We need to Use AdapterView.OnItemClickListener To Handle Input
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -83,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
 
         mConnectionManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        // Initialize a few locations Users can choose from
-        // TODO Add More Useful Cities
+        // Initialize a Few Locations That Users Can Choose From
+        // TODO Add More Cities To Cover More Of The Globe, Preferably with Tectonic Activity
         mRegionsMap = new HashMap<String, GeoCoordinate>();
         mRegionsMap.put("San Francisco", new GeoCoordinate(37.7749, -122.4194));
         mRegionsMap.put("Puerto Vallarta", new GeoCoordinate(20.6220, -105.2283));
@@ -224,6 +224,7 @@ public class MainActivity extends AppCompatActivity {
                         mFeatureAdapter.add(mFeatureList.get(i));
                     }
 
+                    // TODO: Replace Toast with Spinner On Empty ListView When Waiting For Data
                     // Method Chaining Approach to quick Toast to indicate updated data
                     Toast.makeText(getApplicationContext(),
                             "Data Update Complete", Toast.LENGTH_SHORT).show();

@@ -37,7 +37,7 @@ public class Feature {
                 this.mLocation = locationParts[1];
             } else {
                 this.mLocation = location;
-                this.mLocationDetails = "Around The";
+                this.mLocationDetails = "Near The";
             }
         } else {
             this.mLocation = "Default Location";
@@ -77,7 +77,7 @@ public class Feature {
     private void separateDateFromTime(long time) {
         // Work With a formatted Date String
         Date date = new Date(time);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mmZ");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm a"); // Could specify PST
         String formattedDateFull = sdf.format(date);
 
         // Use a Regex Pattern To Extract Out Date From Time
