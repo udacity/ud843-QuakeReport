@@ -43,7 +43,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String LOG_TAG = "SEISMOMETER";
+    private static final String LOG_TAG = "Earthquakes";
 
     private FeatureAdapter mFeatureAdapter;
     private static final int MAX_QUAKE_LIMIT = 20;

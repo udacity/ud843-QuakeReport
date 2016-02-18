@@ -67,20 +67,7 @@ public class FeatureAdapter extends ArrayAdapter<Feature> {
         viewCache.dateView.setText(earthquakeFeature.getDate());
         viewCache.timeView.setText(earthquakeFeature.getTime());
 
-        viewCache.magnitudeView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO
-            }
-        });
-
-        viewCache.locationView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
         return result;
-
     }
 
 }
