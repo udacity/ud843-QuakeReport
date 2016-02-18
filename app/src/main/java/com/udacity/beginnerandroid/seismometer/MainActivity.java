@@ -7,27 +7,21 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.udacity.beginnerandroid.seismometer.Model.Feature;
 import com.udacity.beginnerandroid.seismometer.Model.GeoCoordinate;
 import com.udacity.beginnerandroid.seismometer.Settings.SettingsActivity;
 import com.udacity.beginnerandroid.seismometer.Util.ParsingUtils;
-
-import org.json.JSONArray;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,18 +33,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "Earthquakes";
-
-    private FeatureAdapter mFeatureAdapter;
     private static final int MAX_QUAKE_LIMIT = 20;
-
+    private FeatureAdapter mFeatureAdapter;
     private ArrayList<Feature> mFeatureList;
 
-    private  ConnectivityManager mConnectionManager;
+    private ConnectivityManager mConnectionManager;
 
     private HashMap<String, GeoCoordinate> mRegionsMap;
 
@@ -215,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            if(result != null) {
+            if (result != null) {
                 mFeatureList = ParsingUtils.extractFeatureArrayFromJson(result);
 
                 if (mFeatureList != null) {
@@ -256,11 +246,11 @@ public class MainActivity extends AppCompatActivity {
                 reader = new BufferedReader(new InputStreamReader(inputStream));
 
                 String line;
-                while((line = reader.readLine()) != null) {
+                while ((line = reader.readLine()) != null) {
                     buffer.append(line + "\n");
                 }
 
-                if(buffer.length() == 0) {
+                if (buffer.length() == 0) {
                     // Stream was empty. No point in parsing.
                     return "";
                 }

@@ -7,9 +7,8 @@ import android.widget.TextView;
 /**
  * Created by chrislei on 1/21/16.
  *
- * Cache of views in the grid item view to make recycling of views quicker. This avoids
- * additional {@link View#findViewById(int)} calls after the {@link ViewCache} is first
- * created for a view. See
+ * Cache of views in the grid item view to make recycling of views quicker. This avoids additional
+ * {@link View#findViewById(int)} calls after the {@link ViewCache} is first created for a view. See
  * {@link FeatureAdapter#getView(int position, View convertView, ViewGroup parent)}.
  */
 public class ViewCache {

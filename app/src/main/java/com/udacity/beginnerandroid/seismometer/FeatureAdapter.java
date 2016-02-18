@@ -54,9 +54,9 @@ public class FeatureAdapter extends ArrayAdapter<Feature> {
             backgroundShape.setAlpha(77); // 30 % Opacity on 0 to 255(opaque) scale
         } else if (Math.floor(magnitude) <= 4) {
             backgroundShape.setAlpha(128); // 50 % Opacity on 0 to 255(opaque) scale
-        } else if (Math.floor(magnitude) <= 6 ) {
+        } else if (Math.floor(magnitude) <= 6) {
             backgroundShape.setAlpha(179); // 70 % Opacity on 0 to 255(opaque) scale
-        } else if (Math.floor(magnitude) <= 8 ) {
+        } else if (Math.floor(magnitude) <= 8) {
             backgroundShape.setAlpha(230); // 90 % Opacity on 0 to 255(opaque) scale
         } else {
             backgroundShape.setAlpha(255); // 100% Opacity on 0 to 255(opaque) scale

@@ -1,17 +1,11 @@
 package com.udacity.beginnerandroid.seismometer.Model;
 
-import android.util.Log;
-
-import com.udacity.beginnerandroid.seismometer.Util.ParsingUtils;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by chrislei on 1/20/16.
- */
+
 public class Feature {
     private double mMagnitude;
     private String mLocation;
@@ -31,7 +25,7 @@ public class Feature {
         }
 
         if (location != null) {
-            if(location.contains(" of")) {
+            if (location.contains(" of")) {
                 String[] locationParts = extractStringDetails(location);
                 this.mLocationDetails = locationParts[0];
                 this.mLocation = locationParts[1];
@@ -41,7 +35,7 @@ public class Feature {
             }
         } else {
             this.mLocation = "Default Location";
-            this.mLocationDetails ="Default Location Details";
+            this.mLocationDetails = "Default Location Details";
         }
 
         // From USGS Documentation
@@ -67,12 +61,29 @@ public class Feature {
 
     }
 
-    public double getMagnitude() { return mMagnitude; }
-    public String getLocation() { return mLocation; }
-    public String getLocationDetails() { return mLocationDetails; }
-    public String getDate() { return mDate; }
-    public String getTime() { return mTime; }
-    public String getUrl() { return mUrl; }
+    public double getMagnitude() {
+        return mMagnitude;
+    }
+
+    public String getLocation() {
+        return mLocation;
+    }
+
+    public String getLocationDetails() {
+        return mLocationDetails;
+    }
+
+    public String getDate() {
+        return mDate;
+    }
+
+    public String getTime() {
+        return mTime;
+    }
+
+    public String getUrl() {
+        return mUrl;
+    }
 
     private void separateDateFromTime(long time) {
         // Work With a formatted Date String
@@ -96,7 +107,7 @@ public class Feature {
     }
 
     public String[] extractStringDetails(String description) {
-        String[] details = new String[]{"",""};
+        String[] details = new String[]{"", ""};
 
         // Use a Regex Pattern To Extract Out Location Details
         Pattern p = Pattern.compile("(^.*of)\\s+(\\S{1,}.*$)");

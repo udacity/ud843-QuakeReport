@@ -1,8 +1,5 @@
 package com.udacity.beginnerandroid.seismometer.Model;
 
-/**
- * Created by chrislei on 1/28/16.
- */
 
 public class GeoCoordinate {
     public double mLatitude;

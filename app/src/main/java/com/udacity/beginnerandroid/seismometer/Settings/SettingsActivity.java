@@ -1,14 +1,12 @@
 package com.udacity.beginnerandroid.seismometer.Settings;
 
-import android.app.FragmentTransaction;
+import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.app.FragmentManager;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.udacity.beginnerandroid.seismometer.R;
 
@@ -63,9 +61,9 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         /**
-         * Attaches a listener so the summary is always updated with the preference value.
-         * Also fires the listener once, to initialize the summary (so it shows up before the value
-         * is changed.)
+         * Attaches a listener so the summary is always updated with the preference value. Also
+         * fires the listener once, to initialize the summary (so it shows up before the value is
+         * changed.)
          */
         private void bindPreferenceSummaryToValue(Preference preference) {
             // Set the listener to watch for value changes.
