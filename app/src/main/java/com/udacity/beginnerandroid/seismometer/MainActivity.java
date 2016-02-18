@@ -162,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
 
             if (regionPreference.equals(getString(R.string.settings_units_label_region_default))) {
 
+                //TODO Remove/Hide Radius Preference When World Is Selected
+
                 // Extract The Current Date From The System Time &
                 // And Use As The endDate parameter to the API
                 Date today = new Date(System.currentTimeMillis());

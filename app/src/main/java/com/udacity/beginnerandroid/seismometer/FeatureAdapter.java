@@ -61,19 +61,19 @@ public class FeatureAdapter extends ArrayAdapter<Feature> {
                 backgroundShape.setColor(Color.parseColor("#10cac9"));
                 break;
             case 4:
-                backgroundShape.setColor(Color.parseColor("#41d7b0"));
+                backgroundShape.setColor(Color.parseColor("#f5a623"));
                 break;
             case 5:
-                backgroundShape.setColor(Color.parseColor("#f8cc4f"));
+                backgroundShape.setColor(Color.parseColor("#ff7d50"));
                 break;
             case 6:
-                backgroundShape.setColor(Color.parseColor("#f89828"));
+                backgroundShape.setColor(Color.parseColor("#fc6644"));
                 break;
             case 7:
-                backgroundShape.setColor(Color.parseColor("#ec662a"));
+                backgroundShape.setColor(Color.parseColor("#e75f40"));
                 break;
             case 8:
-                backgroundShape.setColor(Color.parseColor("#ec442a"));
+                backgroundShape.setColor(Color.parseColor("#e13a20"));
                 break;
             case 9:
                 backgroundShape.setColor(Color.parseColor("#d93218"));
