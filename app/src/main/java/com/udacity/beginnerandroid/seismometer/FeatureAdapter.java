@@ -1,8 +1,8 @@
 package com.udacity.beginnerandroid.seismometer;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +11,13 @@ import android.widget.ArrayAdapter;
 import com.udacity.beginnerandroid.seismometer.Model.Feature;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class FeatureAdapter extends ArrayAdapter<Feature> {
 
+    // TODO: Move click listener back here
+    // TODO: Should these be final?
     private Context mContext;
     private LayoutInflater mInflater;
 
@@ -43,45 +46,51 @@ public class FeatureAdapter extends ArrayAdapter<Feature> {
 
         // Bind the data
         double magnitude = earthquakeFeature.getMagnitude();
-        viewCache.magnitudeView.setText(String.format("%.1f", magnitude));
+        viewCache.magnitudeView.setText(String.format(Locale.US, "%.1f", magnitude));
 
         // Adjust the color of the circle background depending on the strength of quake
-        GradientDrawable backgroundShape = (GradientDrawable) viewCache.magnitudeView.
+        GradientDrawable magnitudeCircle = (GradientDrawable) viewCache.magnitudeView.
                 getBackground();
+
+
+        int magnitudeColorId;
 
         switch((int) Math.floor(magnitude)) {
             case 0:
             case 1:
-                backgroundShape.setColor(Color.parseColor("#4a7ba7"));
+                magnitudeColorId = R.color.magnitude1;
                 break;
             case 2:
-                backgroundShape.setColor(Color.parseColor("#04b4b3"));
+                magnitudeColorId = R.color.magnitude2;
                 break;
             case 3:
-                backgroundShape.setColor(Color.parseColor("#10cac9"));
+                magnitudeColorId = R.color.magnitude3;
                 break;
             case 4:
-                backgroundShape.setColor(Color.parseColor("#f5a623"));
+                magnitudeColorId = R.color.magnitude4;
                 break;
             case 5:
-                backgroundShape.setColor(Color.parseColor("#ff7d50"));
+                magnitudeColorId = R.color.magnitude5;
                 break;
             case 6:
-                backgroundShape.setColor(Color.parseColor("#fc6644"));
+                magnitudeColorId = R.color.magnitude6;
                 break;
             case 7:
-                backgroundShape.setColor(Color.parseColor("#e75f40"));
+                magnitudeColorId = R.color.magnitude7;
                 break;
             case 8:
-                backgroundShape.setColor(Color.parseColor("#e13a20"));
+                magnitudeColorId = R.color.magnitude8;
                 break;
             case 9:
-                backgroundShape.setColor(Color.parseColor("#d93218"));
+                magnitudeColorId = R.color.magnitude9;
                 break;
             default:
-                backgroundShape.setColor(Color.parseColor("#c03823"));
+                magnitudeColorId = R.color.magnitude10plus;
                 break;
         }
+
+        final int magnitudeColor = ContextCompat.getColor(mContext, magnitudeColorId);
+        magnitudeCircle.setColor(magnitudeColor);
 
         viewCache.locationView.setText(earthquakeFeature.getLocation());
         viewCache.locationDetailsView.setText(earthquakeFeature.getLocationDetails());

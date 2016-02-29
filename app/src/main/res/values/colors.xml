@@ -3,4 +3,15 @@
     <color name="colorPrimary">#2B3D4D</color>
     <color name="colorPrimaryDark">#23303D</color>
     <color name="colorAccent">#10CAC9</color>
+
+    <color name="magnitude1">#4a7ba7</color>
+    <color name="magnitude2">#04b4b3</color>
+    <color name="magnitude3">#10cac9</color>
+    <color name="magnitude4">#f5a623</color>
+    <color name="magnitude5">#ff7d50</color>
+    <color name="magnitude6">#fc6644</color>
+    <color name="magnitude7">#e75f40</color>
+    <color name="magnitude8">#e13a20</color>
+    <color name="magnitude9">#d93218</color>
+    <color name="magnitude10plus">#c03823</color>
 </resources>
