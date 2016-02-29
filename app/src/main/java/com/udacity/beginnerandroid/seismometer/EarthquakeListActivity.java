@@ -18,7 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.udacity.beginnerandroid.seismometer.Model.Feature;
+import com.udacity.beginnerandroid.seismometer.Model.Earthquake;
 import com.udacity.beginnerandroid.seismometer.Model.GeoCoordinate;
 import com.udacity.beginnerandroid.seismometer.Settings.SettingsActivity;
 import com.udacity.beginnerandroid.seismometer.Util.ParsingUtils;
@@ -35,12 +35,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+
+/**
+ * Here's where it all begins: in the main activity.
+ */
+public class EarthquakeListActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "Earthquakes";
     private static final int MAX_QUAKE_LIMIT = 20;
-    private FeatureAdapter mFeatureAdapter;
-    private ArrayList<Feature> mFeatureList;
+    private EarthquakeAdapter mEarthquakeAdapter;
+    private ArrayList<Earthquake> mEarthquakeList;
 
     private ConnectivityManager mConnectionManager;
 
@@ -49,25 +53,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.earthquake_list_activity);
 
-        // initialize Feature Array
-        mFeatureList = new ArrayList<>();
+        // initialize Earthquake Array
+        mEarthquakeList = new ArrayList<>();
 
         // Fetch the {@link LayoutInflater} service so that new views can be created
         LayoutInflater inflater = (LayoutInflater) getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
 
         ListView list = (ListView) findViewById(R.id.quake_list_view);
-        mFeatureAdapter = new FeatureAdapter(this, inflater, mFeatureList);
-        list.setAdapter(mFeatureAdapter);
+        mEarthquakeAdapter = new EarthquakeAdapter(this, inflater, mEarthquakeList);
+        list.setAdapter(mEarthquakeAdapter);
 
         // TODO - Explain To Students Why We need to Use AdapterView.OnItemClickListener To Handle Input
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Feature feature = mFeatureAdapter.getItem(position);
-                Uri webpage = Uri.parse(feature.getUrl());
+                Earthquake earthquake = mEarthquakeAdapter.getItem(position);
+                Uri webpage = Uri.parse(earthquake.getUrl());
                 Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
                 startActivity(intent);
             }
@@ -202,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // TODO: Extract into
     private class FetchEarthquakeDataTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
@@ -215,12 +220,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
-                mFeatureList = ParsingUtils.extractFeatureArrayFromJson(result);
+                mEarthquakeList = ParsingUtils.extractFeatureArrayFromJson(result);
 
-                if (mFeatureList != null) {
-                    mFeatureAdapter.clear();
-                    for (int i = 0; i < mFeatureList.size(); i++) {
-                        mFeatureAdapter.add(mFeatureList.get(i));
+                if (mEarthquakeList != null) {
+                    mEarthquakeAdapter.clear();
+                    for (int i = 0; i < mEarthquakeList.size(); i++) {
+                        mEarthquakeAdapter.add(mEarthquakeList.get(i));
                     }
 
                     // TODO: Replace Toast with Spinner On Empty ListView When Waiting For Data
@@ -275,6 +280,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             return "";
-        } // END getJSONFromWeb
+        }
     }
+
+
 }

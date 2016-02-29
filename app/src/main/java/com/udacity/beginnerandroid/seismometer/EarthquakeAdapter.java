@@ -8,21 +8,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import com.udacity.beginnerandroid.seismometer.Model.Feature;
+import com.udacity.beginnerandroid.seismometer.Model.Earthquake;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
-
-public class FeatureAdapter extends ArrayAdapter<Feature> {
+/**
+ * Let's build an adaptor, to get our data from our Array of earthquakes into the list view in our activity!
+ */
+public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
     // TODO: Move click listener back here
     // TODO: Should these be final?
     private Context mContext;
     private LayoutInflater mInflater;
 
-    public FeatureAdapter(Context context, LayoutInflater inflater, ArrayList<Feature> features) {
-        super(context, R.layout.list_item_feature, features);
+    public EarthquakeAdapter(Context context, LayoutInflater inflater, ArrayList<Earthquake> earthquakes) {
+        super(context, R.layout.earthquake_list_item, earthquakes);
         mContext = context;
         mInflater = inflater;
     }
@@ -31,7 +33,7 @@ public class FeatureAdapter extends ArrayAdapter<Feature> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View result = convertView;
         if (result == null) {
-            result = mInflater.inflate(R.layout.list_item_feature, parent, false);
+            result = mInflater.inflate(R.layout.earthquake_list_item, parent, false);
         }
 
         // Try to get view cache or create a new one if needed
@@ -42,7 +44,7 @@ public class FeatureAdapter extends ArrayAdapter<Feature> {
         }
 
         // Fetch item
-        final Feature earthquakeFeature = getItem(position);
+        final Earthquake earthquakeFeature = getItem(position);
 
         // Bind the data
         double magnitude = earthquakeFeature.getMagnitude();

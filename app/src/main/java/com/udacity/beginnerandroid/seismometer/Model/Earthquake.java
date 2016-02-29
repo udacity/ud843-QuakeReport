@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class Feature {
+public class Earthquake {
     private double mMagnitude;
     private String mLocation;
     private String mLocationDetails;
@@ -14,10 +14,10 @@ public class Feature {
     private String mTime;
     private String mUrl;
 
-    public Feature(double magnitude,
-                   String location,
-                   long time,
-                   String url) {
+    public Earthquake(double magnitude,
+                      String location,
+                      long time,
+                      String url) {
         if (magnitude != 0) {
             this.mMagnitude = magnitude;
         } else {

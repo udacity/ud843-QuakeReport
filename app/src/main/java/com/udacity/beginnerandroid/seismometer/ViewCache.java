@@ -8,17 +8,15 @@ import android.widget.TextView;
  *
  * Cache of views in the grid item view to make recycling of views quicker. This avoids additional
  * {@link View#findViewById(int)} calls after the {@link ViewCache} is first created for a view. See
- * {@link FeatureAdapter#getView(int position, View convertView, ViewGroup parent)}.
+ * {@link EarthquakeAdapter#getView(int position, View convertView, ViewGroup parent)}.
  */
 public class ViewCache {
     /**
-     * View that displays the default magnitude of the Feature
+     * View that displays the default magnitude of the Earthquake
      */
     public final TextView magnitudeView;
 
-    /**
-     * View that displays the Miwok translation of the word
-     */
+
     public final TextView locationView;
     public final TextView locationDetailsView;
     public final TextView dateView;
