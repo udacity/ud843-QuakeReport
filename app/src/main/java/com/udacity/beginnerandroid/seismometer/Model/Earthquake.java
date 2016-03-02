@@ -1,18 +1,22 @@
 package com.udacity.beginnerandroid.seismometer.Model;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import android.util.Log;
+
+import java.text.DateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
 public class Earthquake {
-    private double mMagnitude;
-    private String mLocation;
-    private String mLocationDetails;
-    private String mDate;
-    private String mTime;
-    private String mUrl;
+
+    public static final String LOG_TAG = Earthquake.class.getName();
+
+    final double mMagnitude;
+    final String mLocation;
+    final String mLocationDetails;
+    final String mDate;
+    final String mTime;
+    final String mUrl;
 
     public Earthquake(double magnitude,
                       String location,
@@ -23,6 +27,8 @@ public class Earthquake {
         } else {
             this.mMagnitude = 0.0;
         }
+
+        Log.d(LOG_TAG, location);
 
         if (location != null) {
             if (location.contains(" of")) {
@@ -41,14 +47,9 @@ public class Earthquake {
         // From USGS Documentation
         // http://earthquake.usgs.gov/earthquakes/feed/v1.0/glossary.php#time
         // time is reported in milliseconds from the Epoch
-        if (time != 0) {
-            // Time Comes In As Unix Time.
-            // Format As a String and Separate Date From Time
-            separateDateFromTime(time);
-        } else {
-            this.mDate = "Default Date";
-            this.mTime = "00:00";
-        }
+
+        mDate = formatDate(time);
+        mTime = formatTime(time);
 
         if (url != null) {
             //replace backslashes
@@ -85,29 +86,29 @@ public class Earthquake {
         return mUrl;
     }
 
-    private void separateDateFromTime(long time) {
-        // Work With a formatted Date String
-        Date date = new Date(time);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm a"); // Could specify PST
-        String formattedDateFull = sdf.format(date);
-
-        // Use a Regex Pattern To Extract Out Date From Time
-        Pattern p = Pattern.compile("(^\\d{4}-\\d{2}-\\d{2})\\s+(.*$)");
-        Matcher m = p.matcher(formattedDateFull);
-        while (m.find()) { // Find each match in turn; String class can't do this.
-            mDate = m.group(1); // Store Extracted Details Of Earthquake Location
-            mTime = m.group(2); // Store Base Location
-
-            /*// For Debugging Function
-            Log.d("EARTHQUAKES", "Extracted this date: " + mDate);
-            Log.d("EARTHQUAKES", "Extracted this time: " + mTime);
-            */
+    private String formatDate(long milliTime) {
+        String formattedDate = "";
+        if (milliTime != 0) {
+            DateFormat dateFormat = DateFormat.getDateInstance();
+            formattedDate = dateFormat.format(milliTime);
         }
-        return;
+        return formattedDate;
     }
+
+    private String formatTime(long milliTime) {
+        String formattedTime = "";
+        if (milliTime != 0) {
+            DateFormat timeFormat = DateFormat.getTimeInstance();
+            formattedTime = timeFormat.format(milliTime);
+        }
+        return formattedTime;
+    }
+
 
     public String[] extractStringDetails(String description) {
         String[] details = new String[]{"", ""};
+
+        Log.d(LOG_TAG, description);
 
         // Use a Regex Pattern To Extract Out Location Details
         Pattern p = Pattern.compile("(^.*of)\\s+(\\S{1,}.*$)");
@@ -121,6 +122,9 @@ public class Earthquake {
             Log.d("EARTHQUAKES", "Extracted for base location: " + details[1]);
             */
         }
+
+        Log.d(LOG_TAG, details[0]);
+        Log.d(LOG_TAG, details[1]);
 
         return details;
     }
