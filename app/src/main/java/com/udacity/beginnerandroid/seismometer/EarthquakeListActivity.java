@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.net.Uri.Builder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -163,49 +164,39 @@ public class EarthquakeListActivity extends AppCompatActivity {
                     getString(R.string.settings_units_value_sort_by_mag_des));
 
             // TODO: Add these strings to strings.xml
+            // TODO: Add default min magnitue and max radius to strings
 
             String minMagnitudePreference = sharedPrefs.getString("min_magnitude", "0.0");
 
-            String maxRadiusPreference = sharedPrefs.getString("max_radius", "100");
 
-            Uri builtUri;
+            Date today = new Date(System.currentTimeMillis());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+            String endDate = sdf.format(today);
 
-            if (regionPreference.equals(getString(R.string.settings_units_label_region_default))) {
+            // TODO: Move max results to strings
+            Builder uriBuilder = Uri.parse(EARTHQUAKE_QUERY_BASE_URL).buildUpon()
+                    .appendQueryParameter(FORMAT_PARAM, responseFormat)
+                    .appendQueryParameter(LIMIT_PARAM, "50")
+                    .appendQueryParameter(EVENT_TYPE_PARAM, eventType)
+                    .appendQueryParameter(ORDER_BY_PARAM, orderByPreference)
+                    .appendQueryParameter(MIN_MAGNITUDE_PARAM, minMagnitudePreference)
+                    .appendQueryParameter(END_TIME_PARAM, endDate);
 
                 //TODO Remove/Hide Radius Preference When World Is Selected
+            if (!regionPreference.equals(getString(R.string.settings_units_label_region_default))) {
+                String latitude = Double.toString(mRegionsMap.get(regionPreference).getLatitude());
+                String longitude = Double.toString(mRegionsMap.get(regionPreference).getLongitude());
+                String maxRadiusPreference = sharedPrefs.getString("max_radius", "100");
 
-                // Extract The Current Date From The System Time &
-                // And Use As The endDate parameter to the API
-                Date today = new Date(System.currentTimeMillis());
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-                String endDate = sdf.format(today);
-
-                builtUri = Uri.parse(EARTHQUAKE_QUERY_BASE_URL).buildUpon()
-                        .appendQueryParameter(FORMAT_PARAM, responseFormat)
-                        .appendQueryParameter(LIMIT_PARAM, "50")
-                        .appendQueryParameter(EVENT_TYPE_PARAM, eventType)
-                        .appendQueryParameter(ORDER_BY_PARAM, orderByPreference)
-                        .appendQueryParameter(MIN_MAGNITUDE_PARAM, minMagnitudePreference)
-                        .appendQueryParameter(END_TIME_PARAM, endDate)
-                        .build();
-            } else {
-                builtUri = Uri.parse(EARTHQUAKE_QUERY_BASE_URL).buildUpon()
-                        .appendQueryParameter(FORMAT_PARAM, responseFormat)
-                        .appendQueryParameter(LIMIT_PARAM, "50")
-                        .appendQueryParameter(EVENT_TYPE_PARAM, eventType)
-                        .appendQueryParameter(ORDER_BY_PARAM, orderByPreference)
-                        .appendQueryParameter(MIN_MAGNITUDE_PARAM, minMagnitudePreference)
-                        .appendQueryParameter(LATITUDE_PARAM,
-                                Double.toString(mRegionsMap.get(regionPreference).getLatitude()))
-                        .appendQueryParameter(LONGITUDE_PARAM,
-                                Double.toString(mRegionsMap.get(regionPreference).getLongitude()))
-                        .appendQueryParameter(MAX_RADIUS_PARAM, maxRadiusPreference)
-                        .build();
+                uriBuilder.appendQueryParameter(LATITUDE_PARAM, latitude)
+                        .appendQueryParameter(LONGITUDE_PARAM, longitude)
+                        .appendQueryParameter(MAX_RADIUS_PARAM, maxRadiusPreference);
             }
+            
 
 
             try {
-                URL url = new URL(builtUri.toString());
+                URL url = new URL(uriBuilder.toString());
                 new FetchEarthquakeDataTask().execute(url);
             } catch (MalformedURLException e) {
 
@@ -213,7 +204,7 @@ public class EarthquakeListActivity extends AppCompatActivity {
             }
 
             // For Debug
-            // Log.d(LOG_TAG,"URL BUILT is " + builtUri.toString());
+            Log.d(LOG_TAG, "URL BUILT is " + uriBuilder.toString());
 
             // TODO: Start Teaching Students Using A Base URL String
             //String baseUrl = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-01-21&endtime=2016-01-28&limit=20&orderby=magnitude&eventtype=earthquake";
@@ -298,7 +289,6 @@ public class EarthquakeListActivity extends AppCompatActivity {
 
             mProgressBar.setVisibility(View.INVISIBLE);
         }
-
 
 
     }
