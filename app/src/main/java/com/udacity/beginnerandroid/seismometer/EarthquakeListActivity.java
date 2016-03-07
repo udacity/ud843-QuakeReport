@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.udacity.beginnerandroid.seismometer.Model.Earthquake;
@@ -50,10 +51,13 @@ public class EarthquakeListActivity extends AppCompatActivity {
 
     private HashMap<String, GeoCoordinate> mRegionsMap;
 
+    private ProgressBar mProgressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_list_activity);
+        mProgressBar = (ProgressBar) findViewById(R.id.loading_indicator);
 
         // initialize Earthquake Array
         mEarthquakeList = new ArrayList<>();
@@ -218,6 +222,11 @@ public class EarthquakeListActivity extends AppCompatActivity {
         }
 
         @Override
+        protected void onPreExecute() {
+            mProgressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
         protected void onPostExecute(String result) {
             if (result != null) {
                 mEarthquakeList = ParsingUtils.extractFeatureArrayFromJson(result);
@@ -237,6 +246,9 @@ public class EarthquakeListActivity extends AppCompatActivity {
                             "No Earthquakes Found", Toast.LENGTH_SHORT).show();
                 }
             }
+
+            mProgressBar.setVisibility(View.INVISIBLE);
+
         }
 
         protected String getJSONFromWeb(URL url) {

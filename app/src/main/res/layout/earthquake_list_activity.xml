@@ -17,4 +17,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:divider="@null"/>
+
+    <ProgressBar
+        android:id="@+id/loading_indicator"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        />
+
 </RelativeLayout>
