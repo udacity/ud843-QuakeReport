@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -201,24 +203,76 @@ public class EarthquakeListActivity extends AppCompatActivity {
                         .build();
             }
 
+
+            try {
+                URL url = new URL(builtUri.toString());
+                new FetchEarthquakeDataTask().execute(url);
+            } catch (MalformedURLException e) {
+
+                Log.e(LOG_TAG, "Problem building the URL: " + e.getLocalizedMessage());
+            }
+
             // For Debug
             // Log.d(LOG_TAG,"URL BUILT is " + builtUri.toString());
 
             // TODO: Start Teaching Students Using A Base URL String
             //String baseUrl = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-01-21&endtime=2016-01-28&limit=20&orderby=magnitude&eventtype=earthquake";
-            new FetchEarthquakeDataTask().execute(builtUri.toString());
+
         }
     }
 
-    // TODO: Extract into
-    private class FetchEarthquakeDataTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-            try {
-                return getJSONFromWeb(new URL(urls[0]));
-            } catch (IOException e) {
-                return "Unable to retrieve response JSON from USGS. URL may be invalid";
+    protected String getJSONFromWeb(URL url) {
+        HttpURLConnection urlConnection = null;
+        BufferedReader reader;
+
+        String earthquakeDataJSON;
+
+        try {
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            //Read the input Stream into a String
+            InputStream inputStream = urlConnection.getInputStream();
+            StringBuilder buffer = new StringBuilder();
+            if (inputStream == null) {
+                // Nothing to do.
+                return "";
             }
+            reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                buffer.append(line + "\n");
+            }
+
+            if (buffer.length() == 0) {
+                // Stream was empty. No point in parsing.
+                return "";
+            }
+
+            earthquakeDataJSON = buffer.toString();
+            return earthquakeDataJSON;
+
+        } catch (IOException e) {
+            //  Log exception here
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+        }
+        return "";
+    }
+
+    // TODO: Extract into
+    private class FetchEarthquakeDataTask extends AsyncTask<URL, Void, ArrayList<Earthquake>> {
+        @Override
+        protected ArrayList<Earthquake> doInBackground(URL... urls) {
+
+            String json = getJSONFromWeb(urls[0]);
+            return ParsingUtils.extractFeatureArrayFromJson(json);
+
+
         }
 
         @Override
@@ -227,73 +281,28 @@ public class EarthquakeListActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(ArrayList<Earthquake> result) {
             if (result != null) {
-                mEarthquakeList = ParsingUtils.extractFeatureArrayFromJson(result);
+                mEarthquakeList = result;
 
-                if (mEarthquakeList != null) {
-                    mEarthquakeAdapter.clear();
-                    for (int i = 0; i < mEarthquakeList.size(); i++) {
-                        mEarthquakeAdapter.add(mEarthquakeList.get(i));
-                    }
 
-                    // TODO: Replace Toast with Spinner On Empty ListView When Waiting For Data
-                    // Method Chaining Approach to quick Toast to indicate updated data
-                    Toast.makeText(getApplicationContext(),
-                            "Data Update Complete", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "No Earthquakes Found", Toast.LENGTH_SHORT).show();
+                mEarthquakeAdapter.clear();
+                for (int i = 0; i < mEarthquakeList.size(); i++) {
+                    mEarthquakeAdapter.add(mEarthquakeList.get(i));
                 }
+
+            } else {
+                Toast.makeText(getApplicationContext(),
+                        "No Earthquakes Found", Toast.LENGTH_SHORT).show();
             }
 
             mProgressBar.setVisibility(View.INVISIBLE);
-
         }
 
-        protected String getJSONFromWeb(URL url) {
-            HttpURLConnection urlConnection = null;
-            BufferedReader reader;
 
-            String earthquakeDataJSON;
 
-            try {
-                urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setRequestMethod("GET");
-                urlConnection.connect();
-
-                //Read the input Stream into a String
-                InputStream inputStream = urlConnection.getInputStream();
-                StringBuilder buffer = new StringBuilder();
-                if (inputStream == null) {
-                    // Nothing to do.
-                    return "";
-                }
-                reader = new BufferedReader(new InputStreamReader(inputStream));
-
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    buffer.append(line + "\n");
-                }
-
-                if (buffer.length() == 0) {
-                    // Stream was empty. No point in parsing.
-                    return "";
-                }
-
-                earthquakeDataJSON = buffer.toString();
-                return earthquakeDataJSON;
-
-            } catch (IOException e) {
-                //  Log exception here
-            } finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-            }
-            return "";
-        }
     }
-
-
 }
+
+
+
