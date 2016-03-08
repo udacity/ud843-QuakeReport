@@ -29,11 +29,8 @@ import com.udacity.beginnerandroid.seismometer.Util.QueryUtils;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 
 
 /**
@@ -130,7 +127,6 @@ public class EarthquakeListActivity extends AppCompatActivity {
             // http://earthquake.usgs.gov/fdsnws/event/1/#parameters
 
 
-
             // Parameters specific to Circular Search/Using a Radius in Kilometers
             // http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&latitude=35.6833&longitude=139.6833&maxradiuskm=80&limit=20&orderby=magnitude&eventtype=earthquake
 
@@ -139,44 +135,37 @@ public class EarthquakeListActivity extends AppCompatActivity {
             SharedPreferences sharedPrefs =
                     PreferenceManager.getDefaultSharedPreferences(this);
 
-            String regionPreference = sharedPrefs.getString(
+            String region = sharedPrefs.getString(
                     getString(R.string.settings_region_key),
                     getString(R.string.settings_region_default));
 
-            String orderByPreference = sharedPrefs.getString(
+            String orderBy = sharedPrefs.getString(
                     getString(R.string.settings_sort_by_key),
-                    getString(R.string.settings_sort_by_mag_des_key));
+                    getString(R.string.settings_sort_by_magnitude_key));
 
-            // TODO: Add these strings to strings.xml
-            // TODO: Add default min magnitue and max radius to strings
 
-            String minMagnitudePreference = sharedPrefs.getString(
+            String minMagnitude = sharedPrefs.getString(
                     getString(R.string.settings_min_magnitude_key),
                     getString(R.string.settings_min_magnitude_default));
 
+            String maxRadius = sharedPrefs.getString(
+                    getString(R.string.settings_max_radius_key),
+                    getString(R.string.settings_max_radius_default));
 
-            Date today = new Date(System.currentTimeMillis());
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-            String endDate = sdf.format(today);
-
-            // TODO: Move max results to strings
             Builder uriBuilder = Uri.parse(getString(R.string.base_url)).buildUpon()
                     .appendQueryParameter(getString(R.string.format_param), getString(R.string.response_format))
                     .appendQueryParameter(getString(R.string.limit_param), getString(R.string.limit))
                     .appendQueryParameter(getString(R.string.event_type_param), getString(R.string.event_type))
-                    .appendQueryParameter(getString(R.string.order_by_param), orderByPreference)
-                    .appendQueryParameter(getString(R.string.min_magnitude_param), minMagnitudePreference)
-                    .appendQueryParameter(getString(R.string.end_time_param), endDate);
+                    .appendQueryParameter(getString(R.string.order_by_param), orderBy)
+                    .appendQueryParameter(getString(R.string.min_magnitude_param), minMagnitude);
 
-            //TODO Remove/Hide Radius Preference When World Is Selected
-            if (!regionPreference.equals(getString(R.string.settings_region_default))) {
-                String latitude = Double.toString(mRegionsMap.get(regionPreference).mLatitude);
-                String longitude = Double.toString(mRegionsMap.get(regionPreference).mLongitude);
-                String maxRadiusPreference = sharedPrefs.getString("max_radius", "100");
+            if (!region.equals(getString(R.string.settings_region_default))) {
+                String latitude = Double.toString(mRegionsMap.get(region).mLatitude);
+                String longitude = Double.toString(mRegionsMap.get(region).mLongitude);
 
                 uriBuilder.appendQueryParameter(getString(R.string.latitude_param), latitude)
                         .appendQueryParameter(getString(R.string.longitude_param), longitude)
-                        .appendQueryParameter(getString(R.string.max_radius_param), maxRadiusPreference);
+                        .appendQueryParameter(getString(R.string.max_radius_param), maxRadius);
             }
 
 
@@ -184,7 +173,6 @@ public class EarthquakeListActivity extends AppCompatActivity {
                 URL url = new URL(uriBuilder.toString());
                 new FetchEarthquakeDataTask().execute(url);
             } catch (MalformedURLException e) {
-
                 Log.e(LOG_TAG, "Problem building the URL: " + e.getLocalizedMessage());
             }
 
@@ -200,7 +188,7 @@ public class EarthquakeListActivity extends AppCompatActivity {
     // TODO: Extract into
     private class FetchEarthquakeDataTask extends AsyncTask<URL, Void, ArrayList<Earthquake>> {
 
-        private static final long LOADING_INDICATOR_DELAY = 500l;
+        private static final long LOADING_INDICATOR_DELAY = 500L;
 
         final Handler handler = new Handler();
 
@@ -238,8 +226,6 @@ public class EarthquakeListActivity extends AppCompatActivity {
             handler.removeCallbacks(displayLoadingIndicator);
             mProgressBar.setVisibility(View.INVISIBLE);
         }
-
-
     }
 }
 

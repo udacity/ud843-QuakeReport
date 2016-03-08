@@ -47,8 +47,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         Earthquake earthquake = getItem(position);
 
         // Bind the data
-        double magnitude = earthquake.mMagnitude;
-        String roundedMagnitude = String.format(Locale.US, "%.1f", magnitude);
+        String roundedMagnitude = String.format(Locale.US, "%.1f", earthquake.mMagnitude);
         String dateTime = earthquake.mDate + "\n" + earthquake.mTime;
 
 
@@ -64,7 +63,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
         int magnitudeColorId;
 
-        switch ((int) Math.floor(magnitude)) {
+        switch ((int) Math.floor(earthquake.mMagnitude)) {
             case 0:
             case 1:
                 magnitudeColorId = R.color.magnitude1;
