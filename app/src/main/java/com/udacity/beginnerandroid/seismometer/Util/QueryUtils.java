@@ -1,8 +1,8 @@
-package com.udacity.beginnerandroid.seismometer.Util;
+package com.udacity.beginnerandroid.seismometer.util;
 
 import android.util.Log;
 
-import com.udacity.beginnerandroid.seismometer.Model.Earthquake;
+import com.udacity.beginnerandroid.seismometer.model.Earthquake;
 
 import org.json.JSONException;
 import org.json.JSONObject;

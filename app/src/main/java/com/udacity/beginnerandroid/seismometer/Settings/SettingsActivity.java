@@ -1,4 +1,4 @@
-package com.udacity.beginnerandroid.seismometer.Settings;
+package com.udacity.beginnerandroid.seismometer.settings;
 
 import android.os.Bundle;
 import android.preference.ListPreference;

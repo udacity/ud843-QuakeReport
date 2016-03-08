@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.udacity.beginnerandroid.seismometer.Model.Earthquake;
+import com.udacity.beginnerandroid.seismometer.model.Earthquake;
 
 import java.util.ArrayList;
 import java.util.Locale;

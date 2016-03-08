@@ -1,4 +1,4 @@
-package com.udacity.beginnerandroid.seismometer.Model;
+package com.udacity.beginnerandroid.seismometer.model;
 
 import java.text.DateFormat;
 

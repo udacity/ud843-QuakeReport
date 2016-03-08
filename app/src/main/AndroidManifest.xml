@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Settings.SettingsActivity"
+        <activity android:name=".settings.SettingsActivity"
             android:label="Filter"
             android:parentActivityName=".EarthquakeListActivity" >
             <meta-data

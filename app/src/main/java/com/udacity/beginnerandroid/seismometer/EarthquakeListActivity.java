@@ -22,10 +22,10 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.udacity.beginnerandroid.seismometer.Model.Earthquake;
-import com.udacity.beginnerandroid.seismometer.Model.GeoCoordinate;
-import com.udacity.beginnerandroid.seismometer.Settings.SettingsActivity;
-import com.udacity.beginnerandroid.seismometer.Util.QueryUtils;
+import com.udacity.beginnerandroid.seismometer.model.Earthquake;
+import com.udacity.beginnerandroid.seismometer.model.GeoCoordinate;
+import com.udacity.beginnerandroid.seismometer.settings.SettingsActivity;
+import com.udacity.beginnerandroid.seismometer.util.QueryUtils;
 
 import java.net.MalformedURLException;
 import java.net.URL;
