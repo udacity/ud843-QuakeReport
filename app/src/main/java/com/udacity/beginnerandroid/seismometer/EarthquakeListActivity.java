@@ -20,7 +20,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.udacity.beginnerandroid.seismometer.model.Earthquake;
 import com.udacity.beginnerandroid.seismometer.model.GeoCoordinate;
@@ -45,12 +45,14 @@ public class EarthquakeListActivity extends AppCompatActivity {
     private ConnectivityManager mConnectionManager;
     private HashMap<String, GeoCoordinate> mRegionsMap;
     private ProgressBar mProgressBar;
+    private TextView mErrorTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_list_activity);
         mProgressBar = (ProgressBar) findViewById(R.id.loading_indicator);
+        mErrorTextView = (TextView) findViewById(R.id.error_text_view);
 
         // initialize Earthquake Array
         mEarthquakeList = new ArrayList<>();
@@ -178,7 +180,10 @@ public class EarthquakeListActivity extends AppCompatActivity {
             // TODO: Start Teaching Students Using A Base URL String
             //String baseUrl = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-01-21&endtime=2016-01-28&limit=20&orderby=magnitude&eventtype=earthquake";
 
+        } else {
+            mErrorTextView.setText(getString(R.string.error_no_connection));
         }
+
     }
 
     // TODO: Extract into
@@ -208,15 +213,14 @@ public class EarthquakeListActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(ArrayList<Earthquake> result) {
-            if (result != null) {
+            if (result != null && !result.isEmpty()) {
                 mEarthquakeList = result;
 
                 mEarthquakeAdapter.clear();
                 mEarthquakeAdapter.addAll(mEarthquakeList);
 
             } else {
-                Toast.makeText(getApplicationContext(),
-                        "No Earthquakes Found", Toast.LENGTH_SHORT).show();
+                mErrorTextView.setText(getString(R.string.error_no_results));
             }
 
             handler.removeCallbacks(displayLoadingIndicator);
