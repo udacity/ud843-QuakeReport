@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
+    android:layout_height="?android:attr/listPreferredItemHeight"
     android:orientation="horizontal"
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
+
+
 
     <TextView
         android:id="@+id/feature_magnitude"
@@ -12,76 +15,66 @@
         android:layout_height="36dp"
         android:background="@drawable/magnitude_circle"
         android:fontFamily="sans-serif-medium"
-        android:textAlignment="center"
         android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="#ffffff"
+        android:textColor="@android:color/white"
         android:textSize="16sp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:gravity="center" />
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        tools:text="9.9"
+        />
 
-    <RelativeLayout
-        android:id="@+id/layout_group_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="19dp"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/feature_magnitude">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        >
 
         <TextView
             android:id="@+id/feature_location_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:alpha="0.4"
+            android:textColor="@android:color/darker_gray"
             android:fontFamily="sans-serif-medium"
-            android:text="99KM East of"
             android:textAllCaps="true"
-            android:textSize="11sp"
-            android:layout_alignParentLeft="true"/>
+            android:textSize="12sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            tools:text = "99KM East of test details that go on way too long and should get cut off"
+
+            />
 
         <TextView
             android:id="@+id/feature_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxWidth="210dp"
             android:fontFamily="sans-serif"
             android:textSize="16sp"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/feature_location_details"/>
-    </RelativeLayout>
+            android:maxLines="2"
+            android:ellipsize="end"
+            tools:text = "This is a stupid long placeholder location that should wrap and then ellipsize when it goes on for too long"
 
-    <RelativeLayout
-        android:id="@+id/layout_group_date_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="230dp">
+            />
+
+    </LinearLayout>
 
         <TextView
-            android:id="@+id/feature_date"
+            android:id="@+id/feature_date_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:alpha="0.4"
             android:fontFamily="sans-serif"
             android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="#2B3D4D"
+            android:textColor="@android:color/darker_gray"
             android:textSize="12sp"
-            android:layout_alignParentRight="true" />
+            android:gravity="end"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            tools:text="Mar 6, 2099\n12:00:00"
+            />
 
-        <TextView
-            android:id="@+id/feature_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:alpha="0.4"
-            android:fontFamily="sans-serif"
-            android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="#2B3D4D"
-            android:textSize="12sp"
-            android:layout_below="@+id/feature_date"
-            android:layout_alignParentRight="true" />
-
-    </RelativeLayout>
-
-
-</RelativeLayout>
+</LinearLayout>
