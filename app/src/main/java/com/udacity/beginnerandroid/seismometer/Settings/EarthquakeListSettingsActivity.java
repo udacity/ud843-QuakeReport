@@ -32,7 +32,6 @@ public class EarthquakeListSettingsActivity extends AppCompatActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-            // Load the settings_main from an XML resource
             addPreferencesFromResource(R.xml.settings_main);
 
             mRegionPreference = findPreference(getString(R.string.settings_region_key));
@@ -46,17 +45,9 @@ public class EarthquakeListSettingsActivity extends AppCompatActivity {
 
         }
 
-        /**
-         * Attaches a listener so the summary is always updated with the preference value. Also
-         * fires the listener once, to initialize the summary (so it shows up before the value is
-         * changed.)
-         */
         private void bindPreferenceSummaryToValue(Preference preference) {
-            // Set the listener to watch for value changes.
             preference.setOnPreferenceChangeListener(this);
 
-            // Trigger the listener immediately with the preference's
-            // current value.
             onPreferenceChange(preference,
                     PreferenceManager
                             .getDefaultSharedPreferences(preference.getContext())
@@ -69,8 +60,6 @@ public class EarthquakeListSettingsActivity extends AppCompatActivity {
             String stringValue = value.toString();
 
             if (preference instanceof ListPreference) {
-                // For list preferences, look up the correct display value in
-                // the preference's 'entries' list (since they have separate labels/values).
                 ListPreference listPreference = (ListPreference) preference;
                 int prefIndex = listPreference.findIndexOfValue(stringValue);
                 if (prefIndex >= 0) {
@@ -78,7 +67,6 @@ public class EarthquakeListSettingsActivity extends AppCompatActivity {
                     preference.setSummary(label);
                 }
             } else {
-                // For other preferences, set the summary to the value's simple string representation.
                 preference.setSummary(stringValue);
             }
 
