@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.net.Uri.Builder;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -24,13 +25,8 @@ import android.widget.Toast;
 import com.udacity.beginnerandroid.seismometer.Model.Earthquake;
 import com.udacity.beginnerandroid.seismometer.Model.GeoCoordinate;
 import com.udacity.beginnerandroid.seismometer.Settings.SettingsActivity;
-import com.udacity.beginnerandroid.seismometer.Util.ParsingUtils;
+import com.udacity.beginnerandroid.seismometer.Util.QueryUtils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -116,10 +112,10 @@ public class EarthquakeListActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        updateFeatureInfo();
+        updateEarthquakeData();
     }
 
-    private void updateFeatureInfo() {
+    private void updateEarthquakeData() {
         NetworkInfo networkInfo = mConnectionManager.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
 
@@ -133,8 +129,6 @@ public class EarthquakeListActivity extends AppCompatActivity {
 
             // TODO: Add all these to strings.xml
             // Parameters Common To All Queries
-            final String EARTHQUAKE_QUERY_BASE_URL =
-                    "http://earthquake.usgs.gov/fdsnws/event/1/query?";
             final String FORMAT_PARAM = "format";
             final String LIMIT_PARAM = "limit";
             final String ORDER_BY_PARAM = "orderby";
@@ -174,15 +168,15 @@ public class EarthquakeListActivity extends AppCompatActivity {
             String endDate = sdf.format(today);
 
             // TODO: Move max results to strings
-            Builder uriBuilder = Uri.parse(EARTHQUAKE_QUERY_BASE_URL).buildUpon()
-                    .appendQueryParameter(FORMAT_PARAM, responseFormat)
-                    .appendQueryParameter(LIMIT_PARAM, "50")
+            Builder uriBuilder = Uri.parse(getString(R.string.base_url)).buildUpon()
+                    .appendQueryParameter(getString(R.string.format_param), getString(R.string.response_format))
+                    .appendQueryParameter(getString(R.string.limit_param), getString(R.string.limit))
                     .appendQueryParameter(EVENT_TYPE_PARAM, eventType)
                     .appendQueryParameter(ORDER_BY_PARAM, orderByPreference)
                     .appendQueryParameter(MIN_MAGNITUDE_PARAM, minMagnitudePreference)
                     .appendQueryParameter(END_TIME_PARAM, endDate);
 
-                //TODO Remove/Hide Radius Preference When World Is Selected
+            //TODO Remove/Hide Radius Preference When World Is Selected
             if (!regionPreference.equals(getString(R.string.settings_units_label_region_default))) {
                 String latitude = Double.toString(mRegionsMap.get(regionPreference).getLatitude());
                 String longitude = Double.toString(mRegionsMap.get(regionPreference).getLongitude());
@@ -192,7 +186,6 @@ public class EarthquakeListActivity extends AppCompatActivity {
                         .appendQueryParameter(LONGITUDE_PARAM, longitude)
                         .appendQueryParameter(MAX_RADIUS_PARAM, maxRadiusPreference);
             }
-            
 
 
             try {
@@ -212,63 +205,30 @@ public class EarthquakeListActivity extends AppCompatActivity {
         }
     }
 
-    protected String getJSONFromWeb(URL url) {
-        HttpURLConnection urlConnection = null;
-        BufferedReader reader;
-
-        String earthquakeDataJSON;
-
-        try {
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("GET");
-            urlConnection.connect();
-
-            //Read the input Stream into a String
-            InputStream inputStream = urlConnection.getInputStream();
-            StringBuilder buffer = new StringBuilder();
-            if (inputStream == null) {
-                // Nothing to do.
-                return "";
-            }
-            reader = new BufferedReader(new InputStreamReader(inputStream));
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line + "\n");
-            }
-
-            if (buffer.length() == 0) {
-                // Stream was empty. No point in parsing.
-                return "";
-            }
-
-            earthquakeDataJSON = buffer.toString();
-            return earthquakeDataJSON;
-
-        } catch (IOException e) {
-            //  Log exception here
-        } finally {
-            if (urlConnection != null) {
-                urlConnection.disconnect();
-            }
-        }
-        return "";
-    }
-
     // TODO: Extract into
     private class FetchEarthquakeDataTask extends AsyncTask<URL, Void, ArrayList<Earthquake>> {
+
+        private static final long LOADING_INDICATOR_DELAY = 500l;
+
+        final Handler handler = new Handler();
+
+        final Runnable displayLoadingIndicator = new Runnable() {
+            @Override
+            public void run() {
+                mProgressBar.setVisibility(View.VISIBLE);
+                Log.d(LOG_TAG, "Setting the progress bar visible");
+            }
+        };
+
         @Override
         protected ArrayList<Earthquake> doInBackground(URL... urls) {
-
-            String json = getJSONFromWeb(urls[0]);
-            return ParsingUtils.extractFeatureArrayFromJson(json);
-
-
+            String json = QueryUtils.getJSONFromWeb(urls[0]);
+            return QueryUtils.extractFeatureArrayFromJson(json);
         }
 
         @Override
         protected void onPreExecute() {
-            mProgressBar.setVisibility(View.VISIBLE);
+            handler.postDelayed(displayLoadingIndicator, LOADING_INDICATOR_DELAY);
         }
 
         @Override
@@ -287,7 +247,10 @@ public class EarthquakeListActivity extends AppCompatActivity {
                         "No Earthquakes Found", Toast.LENGTH_SHORT).show();
             }
 
+
+            handler.removeCallbacks(displayLoadingIndicator);
             mProgressBar.setVisibility(View.INVISIBLE);
+            Log.d(LOG_TAG, "Setting the progress bar invisible");
         }
 
 
