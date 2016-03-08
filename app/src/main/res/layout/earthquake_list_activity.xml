@@ -26,10 +26,10 @@
         />
 
     <TextView
+        android:id="@+id/error_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/error_text_view"
         />
 
 </RelativeLayout>
