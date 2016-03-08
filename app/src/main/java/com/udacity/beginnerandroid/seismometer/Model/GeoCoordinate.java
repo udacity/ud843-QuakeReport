@@ -6,17 +6,8 @@ public class GeoCoordinate {
     public final double mLongitude;
 
     public GeoCoordinate(double latitude, double longitude) {
-        if (latitude != 0) {
-            this.mLatitude = latitude;
-        } else {
-            this.mLatitude = 0.0;
-        }
-
-        if (longitude != 0) {
-            this.mLongitude = longitude;
-        } else {
-            this.mLongitude = 0.0;
-        }
+        this.mLatitude = latitude;
+        this.mLongitude = longitude;
     }
 }
 
