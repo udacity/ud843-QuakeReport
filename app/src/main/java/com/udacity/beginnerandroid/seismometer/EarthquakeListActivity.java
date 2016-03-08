@@ -42,11 +42,8 @@ public class EarthquakeListActivity extends AppCompatActivity {
 
     private EarthquakeAdapter mEarthquakeAdapter;
     private ArrayList<Earthquake> mEarthquakeList;
-
     private ConnectivityManager mConnectionManager;
-
     private HashMap<String, GeoCoordinate> mRegionsMap;
-
     private ProgressBar mProgressBar;
 
     @Override
@@ -66,7 +63,6 @@ public class EarthquakeListActivity extends AppCompatActivity {
         mEarthquakeAdapter = new EarthquakeAdapter(this, inflater, mEarthquakeList);
         list.setAdapter(mEarthquakeAdapter);
 
-        // TODO - Explain To Students Why We need to Use AdapterView.OnItemClickListener To Handle Input
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
