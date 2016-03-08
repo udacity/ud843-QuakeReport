@@ -49,11 +49,14 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         // Bind the data
         double magnitude = earthquake.getMagnitude();
         String roundedMagnitude = String.format(Locale.US, "%.1f", magnitude);
+        String dateTime = earthquake.getDate() + "\n" + earthquake.getTime();
+
+
         viewHolder.magnitudeView.setText(roundedMagnitude);
         viewHolder.locationView.setText(earthquake.getLocation());
         viewHolder.locationDetailsView.setText(earthquake.getLocationDetails());
-        viewHolder.dateView.setText(earthquake.getDate());
-        viewHolder.timeView.setText(earthquake.getTime());
+        viewHolder.dateTimeView.setText(dateTime);
+
 
         // Adjust the color of the circle background depending on the strength of quake
         GradientDrawable magnitudeCircle = (GradientDrawable) viewHolder.magnitudeView.
@@ -109,15 +112,14 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         public final TextView magnitudeView;
         public final TextView locationView;
         public final TextView locationDetailsView;
-        public final TextView dateView;
-        public final TextView timeView;
+        public final TextView dateTimeView;
+
 
         public ViewHolder(View view) {
             magnitudeView = (TextView) view.findViewById(R.id.feature_magnitude);
             locationView = (TextView) view.findViewById(R.id.feature_location);
             locationDetailsView = (TextView) view.findViewById(R.id.feature_location_details);
-            dateView = (TextView) view.findViewById(R.id.feature_date);
-            timeView = (TextView) view.findViewById(R.id.feature_time);
+            dateTimeView = (TextView) view.findViewById(R.id.feature_date_time);
         }
     }
 }
