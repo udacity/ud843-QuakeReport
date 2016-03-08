@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
 import java.util.ArrayList;
 
 public class QueryUtils {
@@ -67,35 +68,47 @@ public class QueryUtils {
 
 
     public static ArrayList<Earthquake> extractFeatureArrayFromJson(String earthquakeJSON) {
+        ArrayList<Earthquake> resultsList = new ArrayList<>();
+
         try {
             JSONObject baseJsonResponse = new JSONObject(earthquakeJSON);
 
+            // TODO: Add these keys to strings.xml
+
             int featureArraySize = baseJsonResponse.getJSONArray("features").length();
 
-            ArrayList<Earthquake> resultsList = new ArrayList<Earthquake>();
 
-            if (featureArraySize != 0) {
-                for (int i = 0; i < featureArraySize; i++) {
-                    JSONObject individualFeature = baseJsonResponse.getJSONArray("features")
-                            .getJSONObject(i)
-                            .getJSONObject("properties");
+            for (int i = 0; i < featureArraySize; i++) {
+                JSONObject individualFeature = baseJsonResponse.getJSONArray("features")
+                        .getJSONObject(i)
+                        .getJSONObject("properties");
 
-                    resultsList.add(new Earthquake(individualFeature.getDouble("mag"),
-                            individualFeature.getString("place"),
-                            individualFeature.getLong("time"),
-                            individualFeature.getString("url")));
+                Double magnitude = individualFeature.getDouble("mag");
+                String rawLocation = individualFeature.getString("place");
+                Long rawTime = individualFeature.getLong("time");
+                String url = individualFeature.getString("url");
+
+                String locationDetails, location;
+
+                if (rawLocation.contains(" of")) {
+                    String[] split = rawLocation.split(" of ");
+                    locationDetails = split[0] + " of";
+                    location = split[1];
+                } else {
+                    locationDetails = "Near The";
+                    location = rawLocation;
                 }
-            } else {
-                // TODO - featureArraySize is Zero
-                // TODO need to respond to this better
-            }
 
-            return resultsList;
+                String date = DateFormat.getDateInstance().format(rawTime);
+                String time = DateFormat.getTimeInstance().format(rawTime);
+
+                resultsList.add(new Earthquake(magnitude, locationDetails, location, time, date, url));
+            }
 
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
             e.printStackTrace();
         }
-        return null;
+        return resultsList;
     }
 }
