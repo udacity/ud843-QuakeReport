@@ -27,17 +27,11 @@
     <string name="settings_sort_by_title">Sort By</string>
     <string name="settings_sort_by_key" translatable="false">sort_by</string>
 
-    <string name="settings_sort_by_mag_des_label">Magnitude - Descending</string>
-    <string name="settings_sort_by_mag_des_key">magnitude</string>
-
-    <string name="settings_sort_by_mag_asc_label">Magnitude - Ascending</string>
-    <string name="settings_sort_by_mag_asc_key" translatable="false">magnitude_asc</string>
+    <string name="settings_sort_by_magnitude_label">Magnitude</string>
+    <string name="settings_sort_by_magnitude_key">magnitude</string>
 
     <string name="settings_sort_by_most_recent_label">Most Recent</string>
     <string name="settings_sort_by_most_recent_kay" translatable="false">time</string>
-
-    <string name="settings_sort_by_least_recent_label">Least Recent</string>
-    <string name="settings_sort_by_least_recent_key" translatable="false">time_asc</string>
 
 
 

@@ -2,7 +2,7 @@
 <resources>
 
     <!-- these are the options displayed in the UI Dialog -->
-    <string-array name="settings_regional_options">
+    <string-array name="settings_regional_labels">
         <item>@string/settings_region_world_label</item>
         <item>@string/settings_region_san_francisco_label</item>
         <item>@string/settings_region_puerto_vallarta_label</item>
@@ -18,18 +18,14 @@
     </string-array>
 
     <!-- these are the options displayed in the UI Dialog -->
-    <string-array name="settings_sort_by_options">
-        <item>@string/settings_sort_by_mag_des_label</item>
-        <item>@string/settings_sort_by_mag_asc_label</item>
+    <string-array name="settings_sort_by_labels">
+        <item>@string/settings_sort_by_magnitude_label</item>
         <item>@string/settings_sort_by_most_recent_label</item>
-        <item>@string/settings_sort_by_least_recent_label</item>
     </string-array>
 
     <!-- these are values used internally by our code -->
     <string-array name="settings_sort_by_values">
-        <item>@string/settings_sort_by_mag_des_key</item>
-        <item>@string/settings_sort_by_mag_asc_key</item>
+        <item>@string/settings_sort_by_magnitude_key</item>
         <item>@string/settings_sort_by_most_recent_kay</item>
-        <item>@string/settings_sort_by_least_recent_key</item>
     </string-array>
 </resources>

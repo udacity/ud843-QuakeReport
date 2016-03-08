@@ -5,14 +5,14 @@
 
     <ListPreference
         android:defaultValue="@string/settings_region_default"
-        android:entries="@array/settings_regional_options"
+        android:entries="@array/settings_regional_labels"
         android:entryValues="@array/settings_regional_values"
         android:key="@string/settings_region_key"
         android:title="@string/settings_region_title"/>
 
     <ListPreference
-        android:defaultValue="@string/settings_sort_by_mag_des_key"
-        android:entries="@array/settings_sort_by_options"
+        android:defaultValue="@string/settings_sort_by_magnitude_key"
+        android:entries="@array/settings_sort_by_labels"
         android:entryValues="@array/settings_sort_by_values"
         android:key="@string/settings_sort_by_key"
         android:title="@string/settings_sort_by_title"/>
