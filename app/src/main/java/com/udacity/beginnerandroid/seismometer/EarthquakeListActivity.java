@@ -38,7 +38,7 @@ import java.util.HashMap;
  */
 public class EarthquakeListActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = "Earthquakes";
+    private static final String LOG_TAG = EarthquakeListActivity.class.getName();
 
     private EarthquakeAdapter mEarthquakeAdapter;
     private ArrayList<Earthquake> mEarthquakeList;
