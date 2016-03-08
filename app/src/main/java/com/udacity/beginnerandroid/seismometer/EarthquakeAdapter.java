@@ -47,14 +47,14 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         Earthquake earthquake = getItem(position);
 
         // Bind the data
-        double magnitude = earthquake.getMagnitude();
+        double magnitude = earthquake.mMagnitude;
         String roundedMagnitude = String.format(Locale.US, "%.1f", magnitude);
-        String dateTime = earthquake.getDate() + "\n" + earthquake.getTime();
+        String dateTime = earthquake.mDate + "\n" + earthquake.mTime;
 
 
         viewHolder.magnitudeView.setText(roundedMagnitude);
-        viewHolder.locationView.setText(earthquake.getLocation());
-        viewHolder.locationDetailsView.setText(earthquake.getLocationDetails());
+        viewHolder.locationView.setText(earthquake.mLocation);
+        viewHolder.locationDetailsView.setText(earthquake.mLocationDetails);
         viewHolder.dateTimeView.setText(dateTime);
 
 
@@ -100,9 +100,6 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
         final int magnitudeColor = ContextCompat.getColor(mContext, magnitudeColorId);
         magnitudeCircle.setColor(magnitudeColor);
-
-
-
         return view;
     }
 
@@ -113,7 +110,6 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         public final TextView locationView;
         public final TextView locationDetailsView;
         public final TextView dateTimeView;
-
 
         public ViewHolder(View view) {
             magnitudeView = (TextView) view.findViewById(R.id.feature_magnitude);

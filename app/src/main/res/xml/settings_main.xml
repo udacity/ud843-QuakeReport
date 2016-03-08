@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
-    android:title="@string/title_quake_settings_root"
-    android:summary="@string/summary_quake_settings_root"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings_title">
 
     <ListPreference
-        android:title="@string/list_preference_region_title"
-        android:key="@string/list_preference_region_key"
-        android:defaultValue="@string/settings_units_label_region_default"
+        android:defaultValue="@string/settings_region_default"
         android:entries="@array/settings_regional_options"
-        android:entryValues="@array/settings_regional_values" />
+        android:entryValues="@array/settings_regional_values"
+        android:key="@string/settings_region_key"
+        android:title="@string/settings_region_title"/>
 
     <ListPreference
-        android:title="@string/list_preference_sort_by_title"
-        android:key="@string/list_preference_sort_by_key"
-        android:defaultValue="@string/settings_units_value_sort_by_mag_des"
+        android:defaultValue="@string/settings_sort_by_mag_des_key"
         android:entries="@array/settings_sort_by_options"
-        android:entryValues="@array/settings_sort_by_values" />
+        android:entryValues="@array/settings_sort_by_values"
+        android:key="@string/settings_sort_by_key"
+        android:title="@string/settings_sort_by_title"/>
 
     <EditTextPreference
-        android:title="Minimum Magnitude"
-        android:key="min_magnitude"
-        android:defaultValue="0.0"
-        android:summary="Show all quakes with magnitude >= the decimal entered here" />
+        android:defaultValue="@string/settings_min_magnitude_default"
+        android:inputType="number"
+        android:key="@string/settings_min_magnitude_key"
+        android:title="@string/settings_min_magnitude_label"/>
 
     <EditTextPreference
-        android:title="Within Maximum Radius (km)"
-        android:key="max_radius"
-        android:defaultValue="50"
-        android:summary="Show all quakes within the following radius (km)" />
+        android:defaultValue="@string/settings_max_radius_default"
+        android:inputType="number"
+        android:key="@string/settings_max_radius_key"
+        android:title="@string/settings_max_radius_label"
+        />
 
 </PreferenceScreen>

@@ -11,12 +11,12 @@ public class Earthquake {
 
     public static final String LOG_TAG = Earthquake.class.getName();
 
-    final double mMagnitude;
-    final String mLocation;
-    final String mLocationDetails;
-    final String mDate;
-    final String mTime;
-    final String mUrl;
+    public final double mMagnitude;
+    public final String mLocation;
+    public final String mLocationDetails;
+    public final String mDate;
+    public final String mTime;
+    public final String mUrl;
 
     public Earthquake(double magnitude,
                       String location,
@@ -60,30 +60,6 @@ public class Earthquake {
             this.mUrl = "http://earthquake.usgs.gov/fdsnws/event/1/";
         }
 
-    }
-
-    public double getMagnitude() {
-        return mMagnitude;
-    }
-
-    public String getLocation() {
-        return mLocation;
-    }
-
-    public String getLocationDetails() {
-        return mLocationDetails;
-    }
-
-    public String getDate() {
-        return mDate;
-    }
-
-    public String getTime() {
-        return mTime;
-    }
-
-    public String getUrl() {
-        return mUrl;
     }
 
     private String formatDate(long milliTime) {

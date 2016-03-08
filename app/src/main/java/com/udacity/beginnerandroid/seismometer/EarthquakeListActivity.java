@@ -42,7 +42,7 @@ import java.util.Locale;
 public class EarthquakeListActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "Earthquakes";
-    private static final int MAX_QUAKE_LIMIT = 20;
+
     private EarthquakeAdapter mEarthquakeAdapter;
     private ArrayList<Earthquake> mEarthquakeList;
 
@@ -74,7 +74,7 @@ public class EarthquakeListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Earthquake earthquake = mEarthquakeAdapter.getItem(position);
-                Uri webpage = Uri.parse(earthquake.getUrl());
+                Uri webpage = Uri.parse(earthquake.mUrl);
                 Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
                 startActivity(intent);
             }
@@ -85,9 +85,15 @@ public class EarthquakeListActivity extends AppCompatActivity {
         // Initialize a Few Locations That Users Can Choose From
         // TODO Add More Cities To Cover More Of The Globe, Preferably with Tectonic Activity
         mRegionsMap = new HashMap<>();
-        mRegionsMap.put("San Francisco", new GeoCoordinate(37.7749, -122.4194));
-        mRegionsMap.put("Puerto Vallarta", new GeoCoordinate(20.6220, -105.2283));
-        mRegionsMap.put("Morocco", new GeoCoordinate(31.6333, -8.0000));
+        mRegionsMap.put(
+                getString(R.string.settings_region_san_francisco_key),
+                new GeoCoordinate(37.7749, -122.4194));
+        mRegionsMap.put(
+                getString(R.string.settings_region_puerto_vallarta_key),
+                new GeoCoordinate(20.6220, -105.2283));
+        mRegionsMap.put(
+                getString(R.string.settings_region_morocco_key),
+                new GeoCoordinate(31.6333, -8.0000));
     }
 
     @Override
@@ -119,48 +125,34 @@ public class EarthquakeListActivity extends AppCompatActivity {
         NetworkInfo networkInfo = mConnectionManager.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
 
-            String responseFormat = "geojson";
-            String eventType = "earthquake";
-
             // Construct the URL for the USGS API query
             // Possible parameters are available at The USGS Earthquake API page, at
             // http://earthquake.usgs.gov/fdsnws/event/1/#parameters
 
 
-            // TODO: Add all these to strings.xml
-            // Parameters Common To All Queries
-            final String FORMAT_PARAM = "format";
-            final String LIMIT_PARAM = "limit";
-            final String ORDER_BY_PARAM = "orderby";
-            final String EVENT_TYPE_PARAM = "eventtype";
-            final String MIN_MAGNITUDE_PARAM = "minmagnitude";
-
-            // Parameters specific to World/Global Query
-            final String START_TIME_PARAM = "starttime";
-            final String END_TIME_PARAM = "endtime";
 
             // Parameters specific to Circular Search/Using a Radius in Kilometers
             // http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&latitude=35.6833&longitude=139.6833&maxradiuskm=80&limit=20&orderby=magnitude&eventtype=earthquake
-            final String LATITUDE_PARAM = "latitude";
-            final String LONGITUDE_PARAM = "longitude";
-            final String MAX_RADIUS_PARAM = "maxradiuskm";
+
 
             // Extract Configuration From SharedPreferences
             SharedPreferences sharedPrefs =
                     PreferenceManager.getDefaultSharedPreferences(this);
 
             String regionPreference = sharedPrefs.getString(
-                    getString(R.string.list_preference_region_key),
-                    getString(R.string.settings_units_label_region_default));
+                    getString(R.string.settings_region_key),
+                    getString(R.string.settings_region_default));
 
             String orderByPreference = sharedPrefs.getString(
-                    getString(R.string.list_preference_sort_by_key),
-                    getString(R.string.settings_units_value_sort_by_mag_des));
+                    getString(R.string.settings_sort_by_key),
+                    getString(R.string.settings_sort_by_mag_des_key));
 
             // TODO: Add these strings to strings.xml
             // TODO: Add default min magnitue and max radius to strings
 
-            String minMagnitudePreference = sharedPrefs.getString("min_magnitude", "0.0");
+            String minMagnitudePreference = sharedPrefs.getString(
+                    getString(R.string.settings_min_magnitude_key),
+                    getString(R.string.settings_min_magnitude_default));
 
 
             Date today = new Date(System.currentTimeMillis());
@@ -171,20 +163,20 @@ public class EarthquakeListActivity extends AppCompatActivity {
             Builder uriBuilder = Uri.parse(getString(R.string.base_url)).buildUpon()
                     .appendQueryParameter(getString(R.string.format_param), getString(R.string.response_format))
                     .appendQueryParameter(getString(R.string.limit_param), getString(R.string.limit))
-                    .appendQueryParameter(EVENT_TYPE_PARAM, eventType)
-                    .appendQueryParameter(ORDER_BY_PARAM, orderByPreference)
-                    .appendQueryParameter(MIN_MAGNITUDE_PARAM, minMagnitudePreference)
-                    .appendQueryParameter(END_TIME_PARAM, endDate);
+                    .appendQueryParameter(getString(R.string.event_type_param), getString(R.string.event_type))
+                    .appendQueryParameter(getString(R.string.order_by_param), orderByPreference)
+                    .appendQueryParameter(getString(R.string.min_magnitude_param), minMagnitudePreference)
+                    .appendQueryParameter(getString(R.string.end_time_param), endDate);
 
             //TODO Remove/Hide Radius Preference When World Is Selected
-            if (!regionPreference.equals(getString(R.string.settings_units_label_region_default))) {
-                String latitude = Double.toString(mRegionsMap.get(regionPreference).getLatitude());
-                String longitude = Double.toString(mRegionsMap.get(regionPreference).getLongitude());
+            if (!regionPreference.equals(getString(R.string.settings_region_default))) {
+                String latitude = Double.toString(mRegionsMap.get(regionPreference).mLatitude);
+                String longitude = Double.toString(mRegionsMap.get(regionPreference).mLongitude);
                 String maxRadiusPreference = sharedPrefs.getString("max_radius", "100");
 
-                uriBuilder.appendQueryParameter(LATITUDE_PARAM, latitude)
-                        .appendQueryParameter(LONGITUDE_PARAM, longitude)
-                        .appendQueryParameter(MAX_RADIUS_PARAM, maxRadiusPreference);
+                uriBuilder.appendQueryParameter(getString(R.string.latitude_param), latitude)
+                        .appendQueryParameter(getString(R.string.longitude_param), longitude)
+                        .appendQueryParameter(getString(R.string.max_radius_param), maxRadiusPreference);
             }
 
 
@@ -216,7 +208,6 @@ public class EarthquakeListActivity extends AppCompatActivity {
             @Override
             public void run() {
                 mProgressBar.setVisibility(View.VISIBLE);
-                Log.d(LOG_TAG, "Setting the progress bar visible");
             }
         };
 
@@ -236,21 +227,16 @@ public class EarthquakeListActivity extends AppCompatActivity {
             if (result != null) {
                 mEarthquakeList = result;
 
-
                 mEarthquakeAdapter.clear();
-                for (int i = 0; i < mEarthquakeList.size(); i++) {
-                    mEarthquakeAdapter.add(mEarthquakeList.get(i));
-                }
+                mEarthquakeAdapter.addAll(mEarthquakeList);
 
             } else {
                 Toast.makeText(getApplicationContext(),
                         "No Earthquakes Found", Toast.LENGTH_SHORT).show();
             }
 
-
             handler.removeCallbacks(displayLoadingIndicator);
             mProgressBar.setVisibility(View.INVISIBLE);
-            Log.d(LOG_TAG, "Setting the progress bar invisible");
         }
 
 

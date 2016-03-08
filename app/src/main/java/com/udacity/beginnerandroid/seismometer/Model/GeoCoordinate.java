@@ -2,8 +2,8 @@ package com.udacity.beginnerandroid.seismometer.Model;
 
 
 public class GeoCoordinate {
-    public double mLatitude;
-    public double mLongitude;
+    public final double mLatitude;
+    public final double mLongitude;
 
     public GeoCoordinate(double latitude, double longitude) {
         if (latitude != 0) {
@@ -17,14 +17,6 @@ public class GeoCoordinate {
         } else {
             this.mLongitude = 0.0;
         }
-    }
-
-    public double getLatitude() {
-        return mLatitude;
-    }
-
-    public double getLongitude() {
-        return mLongitude;
     }
 }
 
