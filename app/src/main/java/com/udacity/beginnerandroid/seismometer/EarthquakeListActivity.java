@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import com.udacity.beginnerandroid.seismometer.model.Earthquake;
 import com.udacity.beginnerandroid.seismometer.model.GeoCoordinate;
-import com.udacity.beginnerandroid.seismometer.settings.SettingsActivity;
+import com.udacity.beginnerandroid.seismometer.settings.EarthquakeListSettingsActivity;
 import com.udacity.beginnerandroid.seismometer.util.QueryUtils;
 
 import java.net.MalformedURLException;
@@ -101,7 +101,7 @@ public class EarthquakeListActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            startActivity(new Intent(this, SettingsActivity.class));
+            startActivity(new Intent(this, EarthquakeListSettingsActivity.class));
             return true;
         }
 

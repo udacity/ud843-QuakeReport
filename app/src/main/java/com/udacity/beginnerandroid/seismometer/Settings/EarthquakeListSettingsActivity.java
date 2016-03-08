@@ -9,24 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.udacity.beginnerandroid.seismometer.R;
 
-public class SettingsActivity extends AppCompatActivity {
+public class EarthquakeListSettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
 
-        // Display the settings fragment as the main content
-
-        /* Without Method Chaining - Might be better for Beginners
-        FragmentManager mFragmentManager = getFragmentManager();
-        FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-        SettingsFragment mSettingsFragment = new SettingsFragment();
-        mFragmentTransaction.replace(android.R.id.content, mSettingsFragment);
-        mFragmentTransaction.commit();
-        */
-
-        // Method Chaining Approach Often Seen Through The Android Framework
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
@@ -35,9 +24,6 @@ public class SettingsActivity extends AppCompatActivity {
     // TODO: Explain to students why this declaration is static
     public static class SettingsFragment extends PreferenceFragment
             implements Preference.OnPreferenceChangeListener {
-
-        public static final String LOG_TAG = SettingsFragment.class.getName();
-
 
         private Preference mRegionPreference;
         private Preference mMaxRadiusPreference;
@@ -53,13 +39,8 @@ public class SettingsActivity extends AppCompatActivity {
             mMaxRadiusPreference = findPreference(getString(R.string.settings_max_radius_key));
 
 
-            // For all preferences, attach an OnPreferenceChangeListener so the UI summary can be
-            // updated when the preference changes.
-
-            // TODO: Harmonise settings string names
             bindPreferenceSummaryToValue(mRegionPreference);
-            bindPreferenceSummaryToValue(findPreference(
-                    getString(R.string.settings_sort_by_key)));
+            bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_sort_by_key)));
             bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_min_magnitude_key)));
             bindPreferenceSummaryToValue(mMaxRadiusPreference);
 
