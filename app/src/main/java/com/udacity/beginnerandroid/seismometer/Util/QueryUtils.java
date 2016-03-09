@@ -1,9 +1,12 @@
 package com.udacity.beginnerandroid.seismometer.util;
 
+import android.content.Context;
 import android.util.Log;
 
+import com.udacity.beginnerandroid.seismometer.R;
 import com.udacity.beginnerandroid.seismometer.model.Earthquake;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,85 +20,63 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 
 public class QueryUtils {
-    public final static String LOG_TAG = QueryUtils.class.getSimpleName();
 
-    //JSON related constants
-    //final private static String BASE_QUERY_JSON = "query";
+    public final static String LOG_TAG = QueryUtils.class.getSimpleName();
 
 
     public static String getJSONFromWeb(URL url) {
         HttpURLConnection urlConnection = null;
         BufferedReader reader;
-
-        String earthquakeDataJSON;
-
+        String output = "";
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
-
-            //Read the input Stream into a String
             InputStream inputStream = urlConnection.getInputStream();
-            StringBuilder buffer = new StringBuilder();
-            if (inputStream == null) {
-                // Nothing to do.
-                return "";
+            if (inputStream != null) {
+                StringBuilder buffer = new StringBuilder();
+                reader = new BufferedReader(new InputStreamReader(inputStream));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line);
+                }
+                output = buffer.toString();
             }
-            reader = new BufferedReader(new InputStreamReader(inputStream));
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line + "\n");
-            }
-
-            if (buffer.length() == 0) {
-                // Stream was empty. No point in parsing.
-                return "";
-            }
-
-            earthquakeDataJSON = buffer.toString();
-            return earthquakeDataJSON;
-
         } catch (IOException e) {
-            //  Log exception here
+            Log.e(LOG_TAG, e.getLocalizedMessage());
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
             }
         }
-        return "";
+        return output;
     }
 
 
-    public static ArrayList<Earthquake> extractFeatureArrayFromJson(String earthquakeJSON) {
+    public static ArrayList<Earthquake> extractFeatureArrayFromJson(String earthquakeJSON, Context context) {
         ArrayList<Earthquake> resultsList = new ArrayList<>();
 
         try {
             JSONObject baseJsonResponse = new JSONObject(earthquakeJSON);
+            JSONArray featureArray = baseJsonResponse.getJSONArray(context.getString(R.string.json_features_key));
 
-            // TODO: Add these keys to strings.xml
+            for (int i = 0; i < featureArray.length(); i++) {
+                JSONObject feature = featureArray.getJSONObject(i)
+                        .getJSONObject(context.getString(R.string.json_properties_key));
 
-            int featureArraySize = baseJsonResponse.getJSONArray("features").length();
-
-
-            for (int i = 0; i < featureArraySize; i++) {
-                JSONObject individualFeature = baseJsonResponse.getJSONArray("features")
-                        .getJSONObject(i)
-                        .getJSONObject("properties");
-
-                Double magnitude = individualFeature.getDouble("mag");
-                String rawLocation = individualFeature.getString("place");
-                Long rawTime = individualFeature.getLong("time");
-                String url = individualFeature.getString("url");
+                Double magnitude = feature.getDouble(context.getString(R.string.json_magnitude_key));
+                String rawLocation = feature.getString(context.getString(R.string.json_place_key));
+                Long rawTime = feature.getLong(context.getString(R.string.json_time_key));
+                String url = feature.getString(context.getString(R.string.json_url_key));
 
                 String locationDetails, location;
 
-                if (rawLocation.contains(" of")) {
-                    String[] split = rawLocation.split(" of ");
-                    locationDetails = split[0] + " of";
+                if (rawLocation.contains(context.getString(R.string.place_details_divider))) {
+                    String[] split = rawLocation.split(context.getString(R.string.place_details_divider));
+                    locationDetails = split[0] + context.getString(R.string.place_details_of);
                     location = split[1];
                 } else {
-                    locationDetails = "Near The";
+                    locationDetails = context.getString(R.string.place_details_near_the);
                     location = rawLocation;
                 }
 

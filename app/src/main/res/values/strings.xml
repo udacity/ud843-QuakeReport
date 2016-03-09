@@ -4,14 +4,14 @@
     <string name="error_no_connection">Error: No Internet Connection</string>
     <string name="error_no_results">No Earthquakes Found!</string>
 
-
+    <!-- Settings -->
 
     <string name="action_settings">Settings</string>
     <string name="settings_title">Earthquake Settings</string>
 
+
     <string name="settings_region_title">Region</string>
     <string name="settings_region_key" translatable="false">region</string>
-
     <string name="settings_region_default" translatable="false">world</string>
 
     <string name="settings_region_world_label">World</string>
@@ -27,7 +27,6 @@
     <string name="settings_region_morocco_key" translatable="false">morocco</string>
 
 
-
     <string name="settings_sort_by_title">Sort By</string>
     <string name="settings_sort_by_key" translatable="false">sort_by</string>
 
@@ -38,18 +37,16 @@
     <string name="settings_sort_by_most_recent_kay" translatable="false">time</string>
 
 
-
     <string name="settings_min_magnitude_label">Minimum Magnitude</string>
     <string name="settings_min_magnitude_key" translatable="false">min_magnitude</string>
     <string name="settings_min_magnitude_default" translatable="false">0.0</string>
-
 
 
     <string name="settings_max_radius_label">Within Maximum Radius (km)</string>
     <string name="settings_max_radius_key" translatable="false">max_radius</string>
     <string name="settings_max_radius_default" translatable="false">50</string>
 
-
+    <!-- Creating the query URL-->
 
     <string name="base_url" translatable="false">http://earthquake.usgs.gov/fdsnws/event/1/query?</string>
     <string name="format_param" translatable="false">format</string>
@@ -66,5 +63,20 @@
     <string name="response_format" translatable="false">geojson</string>
     <string name="event_type" translatable="false">earthquake</string>
     <string name="limit" translatable="false">50</string>
+
+    <!-- Parsing the JSON response-->
+
+    <string name="json_features_key" translatable="false">features</string>
+    <string name="json_properties_key" translatable="false">properties</string>
+    <string name="json_magnitude_key" translatable="false">mag</string>
+    <string name="json_place_key" translatable="false">place</string>
+    <string name="json_time_key" translatable="false">time</string>
+    <string name="json_url_key" translatable="false">url</string>
+
+    <string name="place_details_divider" translatable="false"> of </string>
+    <string name="place_details_of" translatable="false"> of</string>
+    <string name="place_details_near_the">Near the</string>
+
+
 
 </resources>

@@ -46,6 +46,7 @@ public class EarthquakeListActivity extends AppCompatActivity {
     private HashMap<String, GeoCoordinate> mRegionsMap;
     private ProgressBar mProgressBar;
     private TextView mErrorTextView;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,8 @@ public class EarthquakeListActivity extends AppCompatActivity {
         setContentView(R.layout.earthquake_list_activity);
         mProgressBar = (ProgressBar) findViewById(R.id.loading_indicator);
         mErrorTextView = (TextView) findViewById(R.id.error_text_view);
+
+        mContext = this;
 
         mEarthquakeList = new ArrayList<>();
 
@@ -184,7 +187,7 @@ public class EarthquakeListActivity extends AppCompatActivity {
         @Override
         protected ArrayList<Earthquake> doInBackground(URL... urls) {
             String json = QueryUtils.getJSONFromWeb(urls[0]);
-            return QueryUtils.extractFeatureArrayFromJson(json);
+            return QueryUtils.extractFeatureArrayFromJson(json, mContext);
         }
 
         @Override
