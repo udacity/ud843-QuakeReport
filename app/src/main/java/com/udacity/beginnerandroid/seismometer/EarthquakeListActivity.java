@@ -41,7 +41,7 @@ public class EarthquakeListActivity extends AppCompatActivity {
     private static final String LOG_TAG = EarthquakeListActivity.class.getName();
 
     private EarthquakeAdapter mEarthquakeAdapter;
-    private ArrayList<Earthquake> mEarthquakeList;
+
     private ConnectivityManager mConnectionManager;
     private HashMap<String, GeoCoordinate> mRegionsMap;
     private ProgressBar mProgressBar;
@@ -57,12 +57,10 @@ public class EarthquakeListActivity extends AppCompatActivity {
 
         mContext = this;
 
-        mEarthquakeList = new ArrayList<>();
-
         mConnectionManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mEarthquakeAdapter = new EarthquakeAdapter(this, inflater, mEarthquakeList);
+        mEarthquakeAdapter = new EarthquakeAdapter(this, inflater, new ArrayList<Earthquake>());
 
         ListView list = (ListView) findViewById(R.id.quake_list_view);
         list.setAdapter(mEarthquakeAdapter);
