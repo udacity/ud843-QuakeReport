@@ -17,14 +17,29 @@
     <string name="settings_region_world_label">World</string>
     <string name="settings_region_world_key" translatable="false">world</string>
 
-    <string name="settings_region_san_francisco_label">San Francisco</string>
+    <string name="settings_region_san_francisco_label">San Francisco, California</string>
     <string name="settings_region_san_francisco_key" translatable="false">san_francisco</string>
 
-    <string name="settings_region_puerto_vallarta_label">Puerto Vallarta</string>
-    <string name="settings_region_puerto_vallarta_key" translatable="false">puerto_vallarta</string>
+    <string name="settings_region_tokyo_label">Tokyo, Japan</string>
+    <string name="settings_region_tokyo_key" translatable="false">tokyo</string>
 
-    <string name="settings_region_morocco_label">Morocco</string>
-    <string name="settings_region_morocco_key" translatable="false">morocco</string>
+    <string name="settings_region_athens_label">Athens, Greece</string>
+    <string name="settings_region_athens_key" translatable="false">athens</string>
+
+    <string name="settings_region_islamabad_label">Islamabad, Pakistan</string>
+    <string name="settings_region_islamabad_key" translatable="false">islamabad</string>
+
+    <string name="settings_region_chengdu_label">Chengdu, China</string>
+    <string name="settings_region_chengdu_key" translatable="false">chengdu</string>
+
+    <string name="settings_region_santiago_label">Santiago, Chile</string>
+    <string name="settings_region_santiago_key" translatable="false">santiago</string>
+
+    <string name="settings_region_christchurch_label">Christchurch, New Zealand</string>
+    <string name="settings_region_christchurch_key" translatable="false">christchurch</string>
+
+    <string name="settings_region_tangier_label">Tangier, Morocco</string>
+    <string name="settings_region_tangier_key" translatable="false">tangier</string>
 
 
     <string name="settings_sort_by_title">Sort By</string>
@@ -44,7 +59,7 @@
 
     <string name="settings_max_radius_label">Within Maximum Radius (km)</string>
     <string name="settings_max_radius_key" translatable="false">max_radius</string>
-    <string name="settings_max_radius_default" translatable="false">50</string>
+    <string name="settings_max_radius_default" translatable="false">500</string>
 
     <!-- Creating the query URL-->
 

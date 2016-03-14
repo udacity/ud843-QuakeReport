@@ -75,17 +75,32 @@ public class EarthquakeListActivity extends AppCompatActivity {
             }
         });
 
-        // TODO Add More Cities To Cover More Of The Globe, Preferably with Tectonic Activity
+        // Latitude and Longitude of Various Cities Around The World
         mRegionsMap = new HashMap<>();
         mRegionsMap.put(
                 getString(R.string.settings_region_san_francisco_key),
                 new GeoCoordinate(37.7749, -122.4194));
         mRegionsMap.put(
-                getString(R.string.settings_region_puerto_vallarta_key),
-                new GeoCoordinate(20.6220, -105.2283));
+                getString(R.string.settings_region_tokyo_key),
+                new GeoCoordinate(35.7090, 139.7319));
         mRegionsMap.put(
-                getString(R.string.settings_region_morocco_key),
-                new GeoCoordinate(31.6333, -8.0000));
+                getString(R.string.settings_region_athens_key),
+                new GeoCoordinate(37.9839, 23.7294));
+        mRegionsMap.put(
+                getString(R.string.settings_region_islamabad_key),
+                new GeoCoordinate(33.7294, 73.0931));
+        mRegionsMap.put(
+                getString(R.string.settings_region_chengdu_key),
+                new GeoCoordinate(30.5728, 104.0668));
+        mRegionsMap.put(
+                getString(R.string.settings_region_santiago_key),
+                new GeoCoordinate(-33.4489, -70.6692));
+        mRegionsMap.put(
+                getString(R.string.settings_region_christchurch_key),
+                new GeoCoordinate(-43.5320, 172.6362));
+        mRegionsMap.put(
+                getString(R.string.settings_region_tangier_key),
+                new GeoCoordinate(35.7594, -5.8339));
     }
 
     @Override
