@@ -1,3 +1,5 @@
+#! /usr/local/bin/python
+
 from git import Repo
 import os
 import io
@@ -38,8 +40,8 @@ class Flattener:
 
 
     def flatten(self):
-        self.remove_local_branches()
-        self.create_local_branches()
+        # self.remove_local_branches()
+        # self.create_local_branches()
 
 
         try:
@@ -47,8 +49,8 @@ class Flattener:
             print "Stashing"
             self.repo.git.stash()
             current_branch = self.repo.active_branch
-
-            self.copy_snapshots_to_temp_dir(temp_dir)
+            self.create_local_branches(temp_dir)
+            # self.copy_snapshots_to_temp_dir(temp_dir)
             self.copy_snapshots_to_student_branch(temp_dir)
         finally:
             if os.path.exists(temp_dir):
@@ -73,39 +75,55 @@ class Flattener:
                 self.repo.git.branch(branch.name, "-D")
 
 
-    def create_local_branches(self):
+    def create_local_branches(self, temp_dir):
         for rev in self.repo.git.rev_list(self.develop).split("\n"):
             commit = self.repo.commit(rev)
             branch_name = self.clean_commit_message(commit.message)
 
-            print "Creating local branch:", branch_name
-            new_branch = self.repo.create_head(branch_name)
-            new_branch.set_commit(rev)
+            # print "Creating local branch:", branch_name
+            # new_branch = self.repo.create_head(branch_name)
+            # new_branch.set_commit(rev)
+
+            self.repo.git.checkout(commit)
+            print "Saving snapshot of:", branch_name
+            self.repo.git.clean("-fdx")
+            target_dir = os.path.join(temp_dir,branch_name)
+            shutil.copytree(self.repo_dir, target_dir, ignore=shutil.ignore_patterns(*IGNORE_PATTERNS))
 
     def clean_commit_message(self, message):
         first_line = message.split("\n")[0]
         safe_message = "".join(c for c in message if c.isalnum() or c in SAFE_CHARS).strip()
         return safe_message[:MAX_LENGTH] if len(safe_message) > MAX_LENGTH else safe_message
 
-    def copy_snapshots_to_temp_dir(self, temp_dir):
-        for branch in self.repo.branches:
-            if branch.name != self.student and branch.name != self.develop:
-                branch.checkout()
-                print "Saving snapshot of:", branch.name
-                self.repo.git.clean("-fdx")
-                target_dir = os.path.join(temp_dir,branch.name)
-                shutil.copytree(self.repo_dir, target_dir, ignore=shutil.ignore_patterns(*IGNORE_PATTERNS))
+    # def copy_snapshots_to_temp_dir(self, temp_dir):
+    #     for branch in self.repo.branches:
+    #         if branch.name != self.student and branch.name != self.develop:
+    #             branch.checkout()
+    #             print "Saving snapshot of:", branch.name
+    #             self.repo.git.clean("-fdx")
+    #             target_dir = os.path.join(temp_dir,branch.name)
+    #             shutil.copytree(self.repo_dir, target_dir, ignore=shutil.ignore_patterns(*IGNORE_PATTERNS))
 
     def copy_snapshots_to_student_branch(self, temp_dir):
+
+
         self.repo.git.checkout(STUDENT_BRANCH)
-        for branch in self.repo.branches:
-            if branch.name != self.student and branch.name != self.develop:
-                source_dir = os.path.join(temp_dir,branch.name)
-                target_dir = os.path.join(self.repo_dir,branch.name)
-                print "Copying snapshot of:", branch.name
-                if os.path.exists(target_dir):
-                    shutil.rmtree(target_dir)
-                shutil.copytree(source_dir, target_dir)
+        for item in os.listdir(temp_dir):
+            source_dir = os.path.join(temp_dir, item)
+            target_dir = os.path.join(self.repo_dir, item)
+            if os.path.exists(target_dir):
+                shutil.rmtree(target_dir)
+            shutil.copytree(source_dir, target_dir)
+
+
+        # for branch in self.repo.branches:
+        #     if branch.name != self.student and branch.name != self.develop:
+        #         source_dir = os.path.join(temp_dir,branch.name)
+        #         target_dir = os.path.join(self.repo_dir,branch.name)
+        #         print "Copying snapshot of:", branch.name
+        #         if os.path.exists(target_dir):
+        #             shutil.rmtree(target_dir)
+        #         shutil.copytree(source_dir, target_dir)
 
     def remove_remote_branches(self):
     # Delete all remote branches except master
