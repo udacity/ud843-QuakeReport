@@ -113,7 +113,9 @@ class Flattener:
             target_dir = os.path.join(self.repo_dir, item)
             if os.path.exists(target_dir):
                 shutil.rmtree(target_dir)
+            print "Copying: ", item
             shutil.copytree(source_dir, target_dir)
+
 
 
         # for branch in self.repo.branches:
