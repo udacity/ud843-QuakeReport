@@ -1,5 +1,7 @@
 # Welcome to Quake Report
 
+TODO: Start Here!
+
 It's time to start building our app for displaying information about recent earthquakes around the world. This is tough from a teaching perspective, because many different pieces all need to be working together before you see any results.
   
 First, we need to create the URL that queries USGS for the data we want. Next we need to make an HTTP request using that URL. Then we need to parse the JSON data that USGS sends back. Finally we need to update that data in our app's UI. As an extra wrinkle, there's the issue of how to make sure our app stays responsive while we're making our HTTP request (we'll talk about that later in the lesson).

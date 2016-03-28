@@ -38,7 +38,6 @@ public class QueryUtils {
 
     // TODO: Set a String constant for the HTTP method we'll use in our request
     // The method we want is "GET"
-    private static final String HTTP_METHOD = "GET";
 
     private static final String BASE_URL = "http://earthquake.usgs.gov/fdsnws/event/1/query?";
     // Query Parameters
@@ -57,6 +56,7 @@ public class QueryUtils {
     private static final String MAGNITUDE_KEY = "mag";
     private static final String PLACE_KEY = "place";
     private static final String TIME_KEY = "time";
+
 
     public static Map<String, String> getParamMap() {
 

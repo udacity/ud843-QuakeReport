@@ -59,48 +59,6 @@ public class QueryUtils {
     private static final String PLACE_KEY = "place";
     private static final String TIME_KEY = "time";
 
-    /**
-     * TODO: Complete the buildUrl() method
-     *
-     * In this method we're going to use the Uri.Builder class to add query parameters to a base
-     * URL, much like we did using Postman. This saves us from having to fiddle with special
-     * characters while we're composing our URL, and allows us to programmatically decide what
-     * parameters to use add.
-     *
-     * You're probably wondering what a URI is, as opposed to a URL. A URL (uniform resource
-     * locator) is a specific type of URI (uniform resource identifier) that specifies not only what
-     * the resource _is_, but _how_ to retrieve it. To put it simply, a URL is a URI where the
-     * scheme (the bit right at the start before the colon), is `http` or `https`.
-     *
-     * Once we've build up our URI, we now need to transform it into a URL.
-     *
-     * There's a problem that can happen here, though. All URLs are URIs, but not all URIs are URLs.
-     * A URI could point to a file or some other type of resource that we can't get with an HTTP
-     * request. The URL class has a constructor that takes a String, and one of two things can
-     * happen: either the String contains a valid URL, and the URL object is constructed correctly,
-     * or the String does not contain a valid URL... In which case we have a problem. The
-     * constructor could just return `null`, but that's a recipe for very confusing behavior in code
-     * way down the line. Fortunately, Java has a better solution.
-     *
-     * When a Java method can fail, we say it "throws an exception". That means that the usual
-     * execution flow is interrupted, and the method doesn't return anything at all. Instead, it
-     * packages up information about why it failed into an `Exception` object (or a subclass), and
-     * "throws" it. It can then be "caught" by the method that called it (or the method that called
-     * that method, and so on).
-     *
-     * So! When we're using a method that can throw an exception, we write code like the following
-     *
-     * <pre>
-     * {@code
-     *      try {
-     *          someMethodThatCanFail()
-     *      } catch (Exception e) {
-     *          // Deal with the error, or at least log it.
-     *      }
-     * }
-     * </pre>
-     */
-
     public static URL buildUrl() {
 
         // TODO: Create a base URI to build upon, using Uri.Parse() on the base URL constant defined above
@@ -114,11 +72,12 @@ public class QueryUtils {
         URL url = null;
 
         // TODO: Open a try block
+        // Check this guide for help: https://docs.oracle.com/javase/tutorial/essential/exceptions/try.html
 
             // TODO: Initialize the URL with the String version of the URI we built
 
             // TODO: Catch a MalformedURLException
-            // See the above javadoc for the syntax
+            // Check this guide for help https://docs.oracle.com/javase/tutorial/essential/exceptions/catch.html
 
             // TODO: Use Log.e() to log this class's LOG_TAG, an error message, and pass the exception
 

@@ -1,5 +1,7 @@
 # HTTP Requests!
 
+TODO: Start Here!
+
 Now we're getting into the real core of this first lesson: making the HTTP request to get the data we want. In doing so we're going to cover a couple new concepts, including StringBuilder, InputStream, writing functions that throw exceptions, and the `finally` block.
  
 ## `StringBuilder`

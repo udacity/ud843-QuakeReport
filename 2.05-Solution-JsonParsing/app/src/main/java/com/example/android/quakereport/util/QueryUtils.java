@@ -39,7 +39,7 @@ import java.util.Map;
 public class QueryUtils {
 
     public static final String LOG_TAG = QueryUtils.class.getSimpleName();
-
+    
     private static final String HTTP_METHOD = "GET";
     private static final String BASE_URL = "http://earthquake.usgs.gov/fdsnws/event/1/query?";
 
@@ -63,6 +63,7 @@ public class QueryUtils {
     private static final String MAGNITUDE_KEY = "mag";
     private static final String PLACE_KEY = "place";
     private static final String TIME_KEY = "time";
+
 
     public static Map<String, String> getParamMap() {
 

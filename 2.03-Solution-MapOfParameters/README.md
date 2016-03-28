@@ -1,4 +1,6 @@
 # Map o' Parameters
+
+TODO: Start Here!
  
 Using `Uri.Builder` to create a URI (That we then can convert into a URL), is super convenient, but we can make it even better. Using the builder allowed us to avoid hard-coding the query URL. However, the query parameters were still hard-coded into the `buildUrl()` method, which isn't great. What if we wanted to retrieve the list query parameters and values from some other component of our app? What if we wanted to be able to change the query parameters on the fly (like to switch from a global to a regional query).
 

@@ -62,6 +62,7 @@ public class QueryUtils {
     private static final String PLACE_KEY = "place";
     private static final String TIME_KEY = "time";
 
+
     public static Map<String, String> getParamMap() {
 
         HashMap<String, String> paramMap = new HashMap<>();
