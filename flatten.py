@@ -16,147 +16,116 @@ MAX_LENGTH = 100
 STUDENT_BRANCH = "student"
 DEVELOP_BRANCH = "develop"
 ORIGIN = "origin"
+STASH_NAME = "flattenStash"
 
 # Create a directory to stash the flattened folders
 
-class Flattener:
 
-    def __init__(
-        self,
+
+def flatten(
         repo_dir,
-        student_branch,
-        develop_branch,
-        remote
-        ):
+        student,
+        develop,
+        remote,
+        remove_branches,
+        generate_branches):
+    if remove_branches:
+        self.remove_local_branches()
 
-        if repo_dir is None:
-            repo_dir = os.getcwd()
-        self.repo_dir = repo_dir
+    repo = Repo(repo_dir)
+    remote = repo.remote(remote)
 
-        self.repo = Repo(self.repo_dir)
-        self.remote = self.repo.remote(remote)
-        self.student = student_branch
-        self.develop = develop_branch
-
-
-    def flatten(self):
-        # self.remove_local_branches()
-        # self.create_local_branches()
-
-
+    try:
+        temp_dir = tempfile.mkdtemp()
         try:
-            temp_dir = tempfile.mkdtemp()
+            current_branch = repo.active_branch
             print "Stashing"
-            self.repo.git.stash()
-            current_branch = self.repo.active_branch
-            self.create_local_branches(temp_dir)
-            # self.copy_snapshots_to_temp_dir(temp_dir)
-            self.copy_snapshots_to_student_branch(temp_dir)
+            repo.git.stash()
+
+            copy_snapshots_to_temp_dir(repo, repo_dir, develop, temp_dir, generate_branches)
+            copy_snapshots_to_student_branch(repo, student, temp_dir, repo_dir)
+
         finally:
-            if os.path.exists(temp_dir):
-                shutil.rmtree(temp_dir)
-            self.repo.git.checkout(current_branch)
+            repo.git.checkout(current_branch)
             print "Popping"
-            if self.repo.git.stash("list"):
-                self.repo.git.stash("pop")
-
-        # print "Pushing changes"
-        # self.remote.push(all=True, prune = True)
-
-        print "Done! Review and commit the", self.student, "branch at your leisure."
-        print "Then run $ git push {} --all --prune".format(self.remote.name)
+            if repo.git.stash("list"):
+                repo.git.stash("pop")
 
 
+    finally:
+        if os.path.exists(temp_dir):
+            shutil.rmtree(temp_dir)
 
-    def remove_local_branches(self):
-        for branch in self.repo.branches:
-            if branch.name != self.student and branch.name != self.develop:
-                print "Removing local branch:", branch.name
-                self.repo.git.branch(branch.name, "-D")
+    # print "Pushing changes"
+    # self.remote.push(all=True, prune = True)
 
-
-    def create_local_branches(self, temp_dir):
-        for rev in self.repo.git.rev_list(self.develop).split("\n"):
-            commit = self.repo.commit(rev)
-            branch_name = self.clean_commit_message(commit.message)
-
-            # print "Creating local branch:", branch_name
-            # new_branch = self.repo.create_head(branch_name)
-            # new_branch.set_commit(rev)
-
-            self.repo.git.checkout(commit)
-            print "Saving snapshot of:", branch_name
-            self.repo.git.clean("-fdx")
-            target_dir = os.path.join(temp_dir,branch_name)
-            shutil.copytree(self.repo_dir, target_dir, ignore=shutil.ignore_patterns(*IGNORE_PATTERNS))
-
-    def clean_commit_message(self, message):
-        first_line = message.split("\n")[0]
-        safe_message = "".join(c for c in message if c.isalnum() or c in SAFE_CHARS).strip()
-        return safe_message[:MAX_LENGTH] if len(safe_message) > MAX_LENGTH else safe_message
-
-    # def copy_snapshots_to_temp_dir(self, temp_dir):
-    #     for branch in self.repo.branches:
-    #         if branch.name != self.student and branch.name != self.develop:
-    #             branch.checkout()
-    #             print "Saving snapshot of:", branch.name
-    #             self.repo.git.clean("-fdx")
-    #             target_dir = os.path.join(temp_dir,branch.name)
-    #             shutil.copytree(self.repo_dir, target_dir, ignore=shutil.ignore_patterns(*IGNORE_PATTERNS))
-
-    def copy_snapshots_to_student_branch(self, temp_dir):
+    print "Done! Review and commit the", student, "branch at your leisure."
+    print "Then run $ git push {} --all --prune".format(remote.name)
 
 
-        self.repo.git.checkout(STUDENT_BRANCH)
-        for item in os.listdir(temp_dir):
-            source_dir = os.path.join(temp_dir, item)
-            target_dir = os.path.join(self.repo_dir, item)
-            if "Exercise" in item or "Solution" in item:
-                if os.path.exists(target_dir):
-                    shutil.rmtree(target_dir)
-                print "Copying: ", item
-                shutil.copytree(source_dir, target_dir)
+def remove_local_branches(repo, student, develop):
+    for branch in repo.branches:
+        if branch.name != student and branch.name != develop:
+            print "Removing local branch:", branch.name
+            repo.git.branch(branch.name, "-D")
+
+def copy_snapshots_to_temp_dir(repo, repo_dir, develop, temp_dir, generate_branches):
+    for rev in repo.git.rev_list(develop).split("\n"):
+        print rev
+        commit = repo.commit(rev)
+        branch_name = clean_commit_message(commit.message)
+
+        if generate_branches:
+            print "Creating local branch:", branch_name
+            new_branch = repo.create_head(branch_name)
+            new_branch.set_commit(rev)
+
+        repo.git.checkout(commit)
+        print "Saving snapshot of:", branch_name
+        repo.git.clean("-fdx")
+        target_dir = os.path.join(temp_dir,branch_name)
+        print target_dir
+        shutil.copytree(repo_dir, target_dir, ignore=shutil.ignore_patterns(*IGNORE_PATTERNS))
+
+def clean_commit_message(message):
+    first_line = message.split("\n")[0]
+    safe_message = "".join(c for c in message if c.isalnum() or c in SAFE_CHARS).strip()
+    return safe_message[:MAX_LENGTH] if len(safe_message) > MAX_LENGTH else safe_message
 
 
-
-        # for branch in self.repo.branches:
-        #     if branch.name != self.student and branch.name != self.develop:
-        #         source_dir = os.path.join(temp_dir,branch.name)
-        #         target_dir = os.path.join(self.repo_dir,branch.name)
-        #         print "Copying snapshot of:", branch.name
-        #         if os.path.exists(target_dir):
-        #             shutil.rmtree(target_dir)
-        #         shutil.copytree(source_dir, target_dir)
-
-    def remove_remote_branches(self):
-    # Delete all remote branches except master
-        branches_to_remove = []
-        for branch in self.repo.git.branch("-r").split("\n"):
-            name = branch.split("/")[-1].strip()
-            remote = branch.split("/")[0].strip()
-
-            if name != self.student and remote == self.remote.name:
-                branches_to_remove.append(name)
-                # print "Removing remote branch:", name
-                # self.repo.git.push(self.remote, ":" + name)
-
-        self.repo.git.push("--delete", self.remote, " ".join([name for name in branches_to_remove]))
-
-
+def copy_snapshots_to_student_branch(repo, student, temp_dir, repo_dir):
+    repo.git.checkout(student)
+    for item in os.listdir(temp_dir):
+        source_dir = os.path.join(temp_dir, item)
+        target_dir = os.path.join(repo_dir, item)
+        if "Exercise" in item or "Solution" in item:
+            if os.path.exists(target_dir):
+                shutil.rmtree(target_dir)
+            print "Copying: ", item
+            shutil.copytree(source_dir, target_dir)
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--repodir')
-    parser.add_argument('--student', default = STUDENT_BRANCH)
-    parser.add_argument('--develop', default = DEVELOP_BRANCH)
-    parser.add_argument('--remote', default = ORIGIN)
+    parser.add_argument('--repo-dir', '-rd', default = os.getcwd())
+    parser.add_argument('--student-branch', '-s', default = STUDENT_BRANCH)
+    parser.add_argument('--develop-branch', '-d', default = DEVELOP_BRANCH)
+    parser.add_argument('--remote', '-r', default = ORIGIN)
+    parser.add_argument('--remove-branches', '-b', action='store_true')
+    parser.add_argument('--generate-branches', '-g', action='store_true')
 
     parsed = parser.parse_args()
 
-    flattener = Flattener(parsed.repodir,parsed.student, parsed.develop, parsed.remote)
-    flattener.flatten()
+    print parsed
+
+    flatten(
+        parsed.repo_dir,
+        parsed.student_branch,
+        parsed.develop_branch,
+        parsed.remote,
+        parsed.remove_branches,
+        parsed.generate_branches
+
+        )
 
 if __name__ == "__main__":
     sys.exit(main())
-
-
