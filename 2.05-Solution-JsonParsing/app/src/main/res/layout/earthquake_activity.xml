@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (C) 2016 The Android Open Source Project
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context="com.example.android.quakereport.EarthquakeActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/heading_params"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        />
+
+    <TextView
+        android:id="@+id/params"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/url_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/heading_url"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        />
+
+    <TextView
+        android:id="@+id/url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:text="http://earthquake.usgs.gov/fdsnws/event/1/query?limit=10&amp;format=geojson&amp;eventtype=earthquake&amp;latitude=35.7&amp;longitude=139.6&amp;maxradiuskm=1000&amp;orderby=magnitude"
+        />
+
+    <Button
+        android:id="@+id/query_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:onClick="updateEarthquakeData"
+        android:text="@string/button_label_query"
+        />
+
+    <TextView
+        android:id="@+id/raw_json_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/heading_raw_json"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        />
+
+    <TextView
+        android:id="@+id/json"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fadeScrollbars="false"
+        android:maxLines="10"
+        android:minLines="5"
+        android:scrollbars="vertical"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:text="{&quot;type&quot;:&quot;FeatureCollection&quot;,&quot;metadata&quot;:{&quot;generated&quot;:1458347559000,&quot;url&quot;:&quot;http://earthquake.usgs.gov/fdsnws/event/1/query?limit=1&amp;format=geojson&amp;eventtype=earthquake&amp;latitude=35.7&amp;longitude=139.6&amp;maxradiuskm=1000&amp;orderby=magnitude&quot;,&quot;title&quot;:&quot;USGS Earthquakes&quot;,&quot;status&quot;:200,&quot;api&quot;:&quot;1.5.0&quot;,&quot;limit&quot;:1,&quot;offset&quot;:1,&quot;count&quot;:1},&quot;features&quot;:[{&quot;type&quot;:&quot;Feature&quot;,&quot;properties&quot;:{&quot;mag&quot;:5.2,&quot;place&quot;:&quot;16km NNE of Nichinan, Japan&quot;,&quot;time&quot;:1456989075940,&quot;updated&quot;:1456992648228,&quot;tz&quot;:540,&quot;url&quot;:&quot;http://earthquake.usgs.gov/earthquakes/eventpage/us10004u9q&quot;,&quot;detail&quot;:&quot;http://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10004u9q&amp;format=geojson&quot;,&quot;felt&quot;:3,&quot;cdi&quot;:3.4,&quot;mmi&quot;:null,&quot;alert&quot;:null,&quot;status&quot;:&quot;reviewed&quot;,&quot;tsunami&quot;:0,&quot;sig&quot;:417,&quot;net&quot;:&quot;us&quot;,&quot;code&quot;:&quot;10004u9q&quot;,&quot;ids&quot;:&quot;,us10004u9q,&quot;,&quot;sources&quot;:&quot;,us,&quot;,&quot;types&quot;:&quot;,dyfi,geoserve,nearby-cities,origin,phase-data,tectonic-summary,&quot;,&quot;nst&quot;:null,&quot;dmin&quot;:0.848,&quot;rms&quot;:0.91,&quot;gap&quot;:54,&quot;magType&quot;:&quot;mb&quot;,&quot;type&quot;:&quot;earthquake&quot;,&quot;title&quot;:&quot;M 5.2 - 16km NNE of Nichinan, Japan&quot;},&quot;geometry&quot;:{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:[131.4086,31.746,53.43]},&quot;id&quot;:&quot;us10004u9q&quot;}]}"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/heading_earthquake"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerPadding="32dp"
+        >
+
+        <TableRow>
+
+            <TextView android:text="@string/label_magnitude"/>
+
+            <TextView
+                android:id="@+id/magnitude"
+                tools:text="9.0"
+                />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView android:text="@string/label_location"/>
+
+            <TextView
+                android:id="@+id/location"
+                tools:text="9.0"
+                />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView android:text="@string/label_date"/>
+
+            <TextView
+                android:id="@+id/date_time"
+                tools:text="9.0"
+                />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
