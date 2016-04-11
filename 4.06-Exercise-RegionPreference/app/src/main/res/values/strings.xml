@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (C) 2016 The Android Open Source Project
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+    <string name="app_name">Quake Report</string>
+
+    <string name="error_no_params">Error: No query parameters</string>
+    <string name="error_bad_url">Error: Invalid URL</string>
+    <string name="error_no_connection">Error: No Internet Connection</string>
+    <string name="error_no_result">"Error: Couldn't find an earthquake"</string>
+
+    <string name="label_magnitude">"Magnitude: "</string>
+    <string name="label_location">"Location: "</string>
+    <string name="label_date">"Date: "</string>
+
+    <string name="location_near_the">Near the</string>
+    <string name="location_of">%s of</string>
+
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">Earthquake Settings</string>
+
+
+    <string name="settings_min_magnitude_label">Minimum Magnitude</string>
+    <string name="settings_min_magnitude_key" translatable="false">min_magnitude</string>
+    <string name="settings_min_magnitude_default" translatable="false">0.0</string>
+
+    <string name="settings_order_by_label">Order By</string>
+    <string name="settings_order_by_key" translatable="false">order_by</string>
+    <string name="settings_order_by_default" translatable="false">magnitude</string>
+
+    <string name="settings_order_by_magnitude_label">Magnitude</string>
+    <string name="settings_order_by_magnitude_key" translatable="false">magnitude</string>
+
+    <string name="settings_order_by_most_recent_label">Most Recent</string>
+    <string name="settings_order_by_most_recent_key" translatable="false">time</string>
+
+
+    <!-- TODO: Check out the rest of the strings we've added for the region setting -->
+    <string name="settings_region_label">Region</string>
+    <string name="settings_region_key" translatable="false">region</string>
+    <string name="settings_region_default" translatable="false">world</string>
+
+    <string name="settings_region_world_label">World</string>
+    <string name="settings_region_world_key" translatable="false">world</string>
+
+    <string name="settings_region_san_francisco_label">San Francisco, California</string>
+    <string name="settings_region_san_francisco_key" translatable="false">san_francisco</string>
+
+    <string name="settings_region_los_angeles_label">Los Angeles, California</string>
+    <string name="settings_region_los_angeles_key" translatable="false">los_angeles</string>
+
+    <string name="settings_region_tokyo_label">Tokyo, Japan</string>
+    <string name="settings_region_tokyo_key" translatable="false">tokyo</string>
+
+    <string name="settings_region_athens_label">Athens, Greece</string>
+    <string name="settings_region_athens_key" translatable="false">athens</string>
+
+    <string name="settings_region_islamabad_label">Islamabad, Pakistan</string>
+    <string name="settings_region_islamabad_key" translatable="false">islamabad</string>
+
+    <string name="settings_region_chengdu_label">Chengdu, China</string>
+    <string name="settings_region_chengdu_key" translatable="false">chengdu</string>
+
+    <string name="settings_region_santiago_label">Santiago, Chile</string>
+    <string name="settings_region_santiago_key" translatable="false">santiago</string>
+
+    <string name="settings_region_christchurch_label">Christchurch, New Zealand</string>
+    <string name="settings_region_christchurch_key" translatable="false">christchurch</string>
+
+    <string name="settings_region_tangier_label">Tangier, Morocco</string>
+    <string name="settings_region_tangier_key" translatable="false">tangier</string>
+
+</resources>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (C) 2016 The Android Open Source Project
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+
+    <!-- TODO: Check out the string arrays we've added for the region setting -->
+
+    <string-array name="settings_region_labels">
+        <item>@string/settings_region_world_label</item>
+        <item>@string/settings_region_san_francisco_label</item>
+        <item>@string/settings_region_los_angeles_label</item>
+        <item>@string/settings_region_tokyo_label</item>
+        <item>@string/settings_region_athens_label</item>
+        <item>@string/settings_region_islamabad_label</item>
+        <item>@string/settings_region_chengdu_label</item>
+        <item>@string/settings_region_santiago_label</item>
+        <item>@string/settings_region_christchurch_label</item>
+        <item>@string/settings_region_tangier_label</item>
+    </string-array>
+
+    <string-array name="settings_region_values">
+        <item>@string/settings_region_world_key</item>
+        <item>@string/settings_region_san_francisco_key</item>
+        <item>@string/settings_region_los_angeles_key</item>
+        <item>@string/settings_region_tokyo_key</item>
+        <item>@string/settings_region_athens_key</item>
+        <item>@string/settings_region_islamabad_key</item>
+        <item>@string/settings_region_chengdu_key</item>
+        <item>@string/settings_region_santiago_key</item>
+        <item>@string/settings_region_christchurch_key</item>
+        <item>@string/settings_region_tangier_key</item>
+    </string-array>
+
+    <string-array name="settings_order_by_labels">
+        <item>@string/settings_order_by_magnitude_label</item>
+        <item>@string/settings_order_by_most_recent_label</item>
+    </string-array>
+
+    <string-array name="settings_order_by_values">
+        <item>@string/settings_order_by_magnitude_key</item>
+        <item>@string/settings_order_by_most_recent_key</item>
+    </string-array>
+</resources>
