@@ -46,8 +46,8 @@ class Flattener:
 
         try:
             temp_dir = tempfile.mkdtemp()
-            print "Stashing"
-            self.repo.git.stash()
+            # print "Stashing"
+            # self.repo.git.stash()
             current_branch = self.repo.active_branch
             self.create_local_branches(temp_dir)
             # self.copy_snapshots_to_temp_dir(temp_dir)
@@ -56,9 +56,9 @@ class Flattener:
             if os.path.exists(temp_dir):
                 shutil.rmtree(temp_dir)
             self.repo.git.checkout(current_branch)
-            print "Popping"
-            if self.repo.git.stash("list"):
-                self.repo.git.stash("pop")
+            # print "Popping"
+            # if self.repo.git.stash("list"):
+            #     self.repo.git.stash("pop")
 
         # print "Pushing changes"
         # self.remote.push(all=True, prune = True)
@@ -111,10 +111,11 @@ class Flattener:
         for item in os.listdir(temp_dir):
             source_dir = os.path.join(temp_dir, item)
             target_dir = os.path.join(self.repo_dir, item)
-            if os.path.exists(target_dir):
-                shutil.rmtree(target_dir)
-            print "Copying: ", item
-            shutil.copytree(source_dir, target_dir)
+            if "Exercise" in item or "Solution" in item:
+                if os.path.exists(target_dir):
+                    shutil.rmtree(target_dir)
+                print "Copying: ", item
+                shutil.copytree(source_dir, target_dir)
 
 
 
