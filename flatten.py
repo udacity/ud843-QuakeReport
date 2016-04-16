@@ -26,11 +26,13 @@ def flatten(
         remote,
         remove_branches,
         generate_branches):
-    if remove_branches:
-        self.remove_local_branches()
+
 
     repo = Repo(repo_dir)
     remote = repo.remote(remote)
+
+    if remove_branches:
+        remove_local_branches(repo, student, develop)
 
     try:
         temp_dir = tempfile.mkdtemp()
