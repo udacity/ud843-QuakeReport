@@ -42,6 +42,9 @@ def flatten(
             repo.git.stash()
 
             to_temp_dir(repo, repo_dir, develop, temp_dir, generate_branches)
+            insert_diff_links(temp_dir)
+
+
             snapshots_to_student_branch(repo, student, temp_dir, repo_dir)
 
         finally:
@@ -70,22 +73,21 @@ def remove_local_branches(repo, student, develop):
 
 def to_temp_dir(repo, repo_dir, develop, temp_dir, generate_branches):
     for rev in repo.git.rev_list(develop).split("\n"):
-        print rev
         commit = repo.commit(rev)
         branch_name = clean_commit_message(commit.message)
+        if "Exercise" in branch_name or "Solution" in branch_name:
 
-        if generate_branches:
-            print "Creating local branch:", branch_name
-            new_branch = repo.create_head(branch_name)
-            new_branch.set_commit(rev)
+            if generate_branches:
+                print "Creating local branch:", branch_name
+                new_branch = repo.create_head(branch_name)
+                new_branch.set_commit(rev)
 
-        repo.git.checkout(commit)
-        print "Saving snapshot of:", branch_name
-        repo.git.clean("-fdx")
-        target_dir = os.path.join(temp_dir, branch_name)
-        print target_dir
-        shutil.copytree(repo_dir, target_dir,
-                        ignore=shutil.ignore_patterns(*IGNORE_PATTERNS))
+            repo.git.checkout(commit)
+            print "Saving snapshot of:", branch_name
+            repo.git.clean("-fdx")
+            target_dir = os.path.join(temp_dir, branch_name)
+            shutil.copytree(repo_dir, target_dir,
+                            ignore=shutil.ignore_patterns(*IGNORE_PATTERNS))
 
 
 def clean_commit_message(message):
@@ -96,17 +98,27 @@ def clean_commit_message(message):
             if len(safe_message) >
             MAX_LENGTH else safe_message)
 
+def insert_diff_links(temp_dir):
+
+    for item in os.listdir(temp_dir):
+        print item
+        number, _, name = item.split("-")
+        print number, name
+        print os.path.join(temp_dir, item, "README.md")
+        with open(os.path.join(temp_dir, item, "README.md"), "a") as readme:
+            readme.write("\n\nhttps://github.com/udacity/ud843-QuakeReport/compare/{number}-Exercise-{name}...{number}-Solution-{name}\n".formt(number = number, name = name))
+
 
 def snapshots_to_student_branch(repo, student, temp_dir, repo_dir):
     repo.git.checkout(student)
     for item in os.listdir(temp_dir):
         source_dir = os.path.join(temp_dir, item)
         target_dir = os.path.join(repo_dir, item)
-        if "Exercise" in item or "Solution" in item:
-            if os.path.exists(target_dir):
-                shutil.rmtree(target_dir)
-            print "Copying: ", item
-            shutil.copytree(source_dir, target_dir)
+
+        if os.path.exists(target_dir):
+            shutil.rmtree(target_dir)
+        print "Copying: ", item
+        shutil.copytree(source_dir, target_dir)
 
 
 def main():
