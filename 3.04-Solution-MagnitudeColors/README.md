@@ -5,3 +5,6 @@ Setting up the earthquake adapter was a lot of work! Let's do something a little
 # The Exercise
 
 First update `Utils.java` to include a function for picking the correct color, then use that color in `EarthquakeAdapter.java`. Check out the TODOs to get started!
+
+
+https://github.com/udacity/ud843-QuakeReport/compare/3.04-Exercise-MagnitudeColors...3.04-Solution-MagnitudeColors

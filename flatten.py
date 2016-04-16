@@ -106,7 +106,7 @@ def insert_diff_links(temp_dir):
         print number, name
         print os.path.join(temp_dir, item, "README.md")
         with open(os.path.join(temp_dir, item, "README.md"), "a") as readme:
-            readme.write("\n\nhttps://github.com/udacity/ud843-QuakeReport/compare/{number}-Exercise-{name}...{number}-Solution-{name}\n".formt(number = number, name = name))
+            readme.write("\n\nhttps://github.com/udacity/ud843-QuakeReport/compare/{number}-Exercise-{name}...{number}-Solution-{name}\n".format(number = number, name = name))
 
 
 def snapshots_to_student_branch(repo, student, temp_dir, repo_dir):

@@ -35,3 +35,6 @@ Exceptions are a very deep topic that we're only going to touch on just enough t
 # The Exercise
 
 In this exercise, you'll first define some constants for the base query URL and query parameters, then build those components into a URI. Finally, you'll convert that URI into a URL, which will then be used to query USGS! Check out the TODOs pane at the bottom left of Android Studio to find your instructions.
+
+
+https://github.com/udacity/ud843-QuakeReport/compare/2.02-Exercise-UrlBuilding...2.02-Solution-UrlBuilding

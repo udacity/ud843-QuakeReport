@@ -35,3 +35,6 @@ Read over the "Class Overview" and "The 4 steps" of AsyncTask, which you can fin
 First, visit `AndroidManifest.xml` and request the permissions we need for internet access. Then head over to `EarthquakeActivity.java` and finish `EarthquakeTask`. Then add code to `updateEarthquakeData()` to create and execute an `EarthquakeTask`.
 
 Best of luck, and check out the solution project if you run into any trouble!
+
+
+https://github.com/udacity/ud843-QuakeReport/compare/2.06-Exercise-AsyncTask...2.06-Solution-AsyncTask

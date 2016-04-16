@@ -18,3 +18,6 @@ We'll be rigging up a a `ListView` and `Adapter` shortly, but for now, we'll jus
 
 Start in `QueryUtils`, then fix up `EarthquakeAdapter`, and the callbacks in `EarthquakeActivity`. Finally set up `EarthquakeActivity` to display a janky list of earthquakes. Check out the TODO pane at the bottom left of Android Studio to get started!
 
+
+
+https://github.com/udacity/ud843-QuakeReport/compare/3.01-Exercise-EarthquakeList...3.01-Solution-EarthquakeList

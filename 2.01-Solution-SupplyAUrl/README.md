@@ -15,3 +15,6 @@ First, though, you'll need to import this project into Android Studio. Open up A
 Each exercise will consist of various tasks you'll need to complete, each of which will be tagged with a TODO comment. You can find all TODOs in the TODO pane at the bottom left of Android Studio. In fact, to find this file in Android Studio, you can open up the TODO pane, and find `README.md`. Hopefully you're now reading this file inside Android Studio.
 
 To complete this exercise, double click on the TODO item in `EarthquakeActivity.java`, and follow the instructions in the comment you'll find there.
+
+
+https://github.com/udacity/ud843-QuakeReport/compare/2.01-Exercise-SupplyAUrl...2.01-Solution-SupplyAUrl

@@ -5,3 +5,6 @@ It'd be nice to allow the user to click on a list item to learn more about that 
 # The Exercise
 
 First fix up `Earthquake` to accept a URL `String` argument, and have it convert that `String` to a `Uri` and hold onto it. Then upgrade `QueryUtils` to extract the USGS webpage URL for each earthquake. Finally, in `EarthquakeActivity`, finish up an `OnItemClickListener` that gets the `Earthquake` from the `EarthquakeAdapter`, and creates an implicit `Intent` to VIEW the earthquake's `Uri`.
+
+
+https://github.com/udacity/ud843-QuakeReport/compare/3.05-Exercise-ClickListener...3.05-Solution-ClickListener

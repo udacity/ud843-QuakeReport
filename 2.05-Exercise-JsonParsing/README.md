@@ -61,3 +61,6 @@ Let's also plan out how we're going to store the earthquake data we'll return to
 
 This is the first time we've had multiple files with TODOs. When that happens, we'll give some hints on the recommended order to tackle the various tasks. In this case, it'll be helpful to complete the TODOs in `Earthquake.java` before moving on to `QueryUtils`. 
 
+
+
+https://github.com/udacity/ud843-QuakeReport/compare/2.05-Exercise-JsonParsing...2.05-Solution-JsonParsing

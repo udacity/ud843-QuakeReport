@@ -59,3 +59,6 @@ In this exercise, we'll open up a `HttpURLConnection`, and retrieve the resultin
 That's quite the challenge, but the TODOs in the code will walk you through the process. Remember you can always check out the solution folder if you run into a task you're not sure how to handle.
 
 
+
+
+https://github.com/udacity/ud843-QuakeReport/compare/2.04-Exercise-HttpRequest...2.04-Solution-HttpRequest

@@ -26,3 +26,6 @@ Finally, we need to have our query button request that the `LoaderManager` spin 
 
 First, work through the TODOs in `EarthquakeLoader.java` to create our loader. Then tackle the TODOs in `EarthquakeActivity.java`. When you're done, watch the logs when you start up the app and press the query button. No matter how many times you hit the button, the network access will only happen once!
 
+
+
+https://github.com/udacity/ud843-QuakeReport/compare/2.07-Exercise-Loaders...2.07-Solution-Loaders

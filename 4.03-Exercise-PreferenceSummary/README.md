@@ -15,3 +15,6 @@ So here's the plan of attack:
 # The Exercise
 
 This one is all in `SettingsActivity`. Check out the TODOs to get started!
+
+
+https://github.com/udacity/ud843-QuakeReport/compare/4.03-Exercise-PreferenceSummary...4.03-Solution-PreferenceSummary
