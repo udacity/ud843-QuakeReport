@@ -106,7 +106,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderCallb
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        // TODO: Use getMenuInflator().inflate() to inflate R.menu.main
+        // TODO: Use getMenuInflater().inflate() to inflate R.menu.main
 
         return true;
     }
