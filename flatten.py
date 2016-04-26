@@ -38,17 +38,19 @@ def flatten(repo_dir, student, develop_branches, remove_branches):
         temp_dir = tempfile.mkdtemp()
         try:
             current_branch = repo.active_branch
-            print "Stashing"
-            repo.git.stash()
+
+            if repo.is_dirty():
+                print "Stashing"
+                repo.git.stash()
 
             for develop in develop_branches:
                 to_temp_dir(repo, repo_dir, develop, temp_dir, flat)
-            # insert_diff_links(temp_dir)
             snapshots_to_student_branch(repo, student, temp_dir, repo_dir)
         finally:
             repo.git.checkout(current_branch)
-            print "Popping"
             if repo.git.stash("list"):
+                print "Popping"
+
                 repo.git.stash("pop")
     finally:
         if os.path.exists(temp_dir):
@@ -107,13 +109,6 @@ and a zip of the solution [here](https://github.com/udacity/ud843-QuakeReport/ar
 Also, you can find a visual summary of the solution [here](https://github.com/udacity/ud843-QuakeReport/compare/{number}-Exercise-{name}...{number}-Solution-{name}).
 
 """
-
-
-def insert_diff_links(temp_dir):
-    for item in os.listdir(temp_dir):
-        number, _, name = item.split("-")
-        with open(os.path.join(temp_dir, item, "README.md"), "a") as readme:
-            readme.write(DIFF_FORMAT.format(number=number, name=name))
 
 
 def snapshots_to_student_branch(repo, student, temp_dir, repo_dir):
