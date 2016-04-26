@@ -28,4 +28,5 @@ First, work through the TODOs in `EarthquakeLoader.java` to create our loader. T
 
 
 
-https://github.com/udacity/ud843-QuakeReport/compare/2.07-Exercise-Loaders...2.07-Solution-Loaders
+You can download a zip of this exercise [here](https://github.com/udacity/ud843-QuakeReport/archive/2.07-Exercise-Loaders.zip), and a zip of the solution [here](https://github.com/udacity/ud843-QuakeReport/archive/2.07-Solution-Loaders.zip). Also, you can find a visual summary of the solution [here](https://github.com/udacity/ud843-QuakeReport/compare/2.07-Exercise-Loaders...2.07-Solution-Loaders).
+

@@ -17,4 +17,5 @@ So here's the plan of attack:
 This one is all in `SettingsActivity`. Check out the TODOs to get started!
 
 
-https://github.com/udacity/ud843-QuakeReport/compare/4.03-Exercise-PreferenceSummary...4.03-Solution-PreferenceSummary
+You can download a zip of this exercise [here](https://github.com/udacity/ud843-QuakeReport/archive/4.03-Exercise-PreferenceSummary.zip), and a zip of the solution [here](https://github.com/udacity/ud843-QuakeReport/archive/4.03-Solution-PreferenceSummary.zip). Also, you can find a visual summary of the solution [here](https://github.com/udacity/ud843-QuakeReport/compare/4.03-Exercise-PreferenceSummary...4.03-Solution-PreferenceSummary).
+

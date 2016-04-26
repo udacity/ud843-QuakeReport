@@ -17,4 +17,5 @@ Each exercise will consist of various tasks you'll need to complete, each of whi
 To complete this exercise, double click on the TODO item in `EarthquakeActivity.java`, and follow the instructions in the comment you'll find there.
 
 
-https://github.com/udacity/ud843-QuakeReport/compare/2.01-Exercise-SupplyAUrl...2.01-Solution-SupplyAUrl
+You can download a zip of this exercise [here](https://github.com/udacity/ud843-QuakeReport/archive/2.01-Exercise-SupplyAUrl.zip), and a zip of the solution [here](https://github.com/udacity/ud843-QuakeReport/archive/2.01-Solution-SupplyAUrl.zip). Also, you can find a visual summary of the solution [here](https://github.com/udacity/ud843-QuakeReport/compare/2.01-Exercise-SupplyAUrl...2.01-Solution-SupplyAUrl).
+

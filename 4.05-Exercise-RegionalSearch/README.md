@@ -9,4 +9,5 @@ First, we've added a bunch of region keys to `strings.xml`. We've also added a n
 Check out the TODOs to get started!
 
 
-https://github.com/udacity/ud843-QuakeReport/compare/4.05-Exercise-RegionalSearch...4.05-Solution-RegionalSearch
+You can download a zip of this exercise [here](https://github.com/udacity/ud843-QuakeReport/archive/4.05-Exercise-RegionalSearch.zip), and a zip of the solution [here](https://github.com/udacity/ud843-QuakeReport/archive/4.05-Solution-RegionalSearch.zip). Also, you can find a visual summary of the solution [here](https://github.com/udacity/ud843-QuakeReport/compare/4.05-Exercise-RegionalSearch...4.05-Solution-RegionalSearch).
+

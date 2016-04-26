@@ -63,4 +63,5 @@ This is the first time we've had multiple files with TODOs. When that happens, w
 
 
 
-https://github.com/udacity/ud843-QuakeReport/compare/2.05-Exercise-JsonParsing...2.05-Solution-JsonParsing
+You can download a zip of this exercise [here](https://github.com/udacity/ud843-QuakeReport/archive/2.05-Exercise-JsonParsing.zip), and a zip of the solution [here](https://github.com/udacity/ud843-QuakeReport/archive/2.05-Solution-JsonParsing.zip). Also, you can find a visual summary of the solution [here](https://github.com/udacity/ud843-QuakeReport/compare/2.05-Exercise-JsonParsing...2.05-Solution-JsonParsing).
+

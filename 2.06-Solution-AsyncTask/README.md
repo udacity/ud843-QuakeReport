@@ -37,4 +37,5 @@ First, visit `AndroidManifest.xml` and request the permissions we need for inter
 Best of luck, and check out the solution project if you run into any trouble!
 
 
-https://github.com/udacity/ud843-QuakeReport/compare/2.06-Exercise-AsyncTask...2.06-Solution-AsyncTask
+You can download a zip of this exercise [here](https://github.com/udacity/ud843-QuakeReport/archive/2.06-Exercise-AsyncTask.zip), and a zip of the solution [here](https://github.com/udacity/ud843-QuakeReport/archive/2.06-Solution-AsyncTask.zip). Also, you can find a visual summary of the solution [here](https://github.com/udacity/ud843-QuakeReport/compare/2.06-Exercise-AsyncTask...2.06-Solution-AsyncTask).
+

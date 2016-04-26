@@ -13,4 +13,5 @@ We've added labels and key strings to `strings.xml`, and arrays of labels and ke
 It's up to you to wire up the order-by preference in the `QueryUtils.getParamsMap()` method, then update the `EarthquakePreferenceFragment.onPreferenceChange()` method to properly update the order-by preference's summary. Check out the TODOs to get started, and open the solution project if you get stuck!
 
 
-https://github.com/udacity/ud843-QuakeReport/compare/4.04-Exercise-OrderBy...4.04-Solution-OrderBy
+You can download a zip of this exercise [here](https://github.com/udacity/ud843-QuakeReport/archive/4.04-Exercise-OrderBy.zip), and a zip of the solution [here](https://github.com/udacity/ud843-QuakeReport/archive/4.04-Solution-OrderBy.zip). Also, you can find a visual summary of the solution [here](https://github.com/udacity/ud843-QuakeReport/compare/4.04-Exercise-OrderBy...4.04-Solution-OrderBy).
+

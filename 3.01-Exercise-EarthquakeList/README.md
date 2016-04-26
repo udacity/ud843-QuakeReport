@@ -20,4 +20,5 @@ Start in `QueryUtils`, then fix up `EarthquakeAdapter`, and the callbacks in `Ea
 
 
 
-https://github.com/udacity/ud843-QuakeReport/compare/3.01-Exercise-EarthquakeList...3.01-Solution-EarthquakeList
+You can download a zip of this exercise [here](https://github.com/udacity/ud843-QuakeReport/archive/3.01-Exercise-EarthquakeList.zip), and a zip of the solution [here](https://github.com/udacity/ud843-QuakeReport/archive/3.01-Solution-EarthquakeList.zip). Also, you can find a visual summary of the solution [here](https://github.com/udacity/ud843-QuakeReport/compare/3.01-Exercise-EarthquakeList...3.01-Solution-EarthquakeList).
+

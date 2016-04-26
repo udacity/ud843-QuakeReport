@@ -23,4 +23,5 @@ In our layout, we'd like to display the date and time on separate lines, so we'l
 First modify `Earthquake` to format the location, location offset, and date/time correctly. Then update the `onLoadFinished()` method of `EarthquakeActivity` to create a new view for each earthquake. Check out the TODOs to get started!
 
 
-https://github.com/udacity/ud843-QuakeReport/compare/3.02-Exercise-FakeAdapter...3.02-Solution-FakeAdapter
+You can download a zip of this exercise [here](https://github.com/udacity/ud843-QuakeReport/archive/3.02-Exercise-FakeAdapter.zip), and a zip of the solution [here](https://github.com/udacity/ud843-QuakeReport/archive/3.02-Solution-FakeAdapter.zip). Also, you can find a visual summary of the solution [here](https://github.com/udacity/ud843-QuakeReport/compare/3.02-Exercise-FakeAdapter...3.02-Solution-FakeAdapter).
+

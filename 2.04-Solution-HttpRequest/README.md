@@ -61,4 +61,5 @@ That's quite the challenge, but the TODOs in the code will walk you through the 
 
 
 
-https://github.com/udacity/ud843-QuakeReport/compare/2.04-Exercise-HttpRequest...2.04-Solution-HttpRequest
+You can download a zip of this exercise [here](https://github.com/udacity/ud843-QuakeReport/archive/2.04-Exercise-HttpRequest.zip), and a zip of the solution [here](https://github.com/udacity/ud843-QuakeReport/archive/2.04-Solution-HttpRequest.zip). Also, you can find a visual summary of the solution [here](https://github.com/udacity/ud843-QuakeReport/compare/2.04-Exercise-HttpRequest...2.04-Solution-HttpRequest).
+

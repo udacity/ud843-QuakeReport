@@ -38,4 +38,5 @@ For more info, check out: https://docs.oracle.com/javase/7/docs/api/java/util/It
 In this exercise, you'll fill in a function that creates a `HashMap<String, String>` that holds our query parameters, and you'll modify the `buildUrl()` function to process that `Map` into a URL. Check out the TODOs at the bottom of your Android Studio window to find your specific instructions!
 
 
-https://github.com/udacity/ud843-QuakeReport/compare/2.03-Exercise-ParameterMap...2.03-Solution-ParameterMap
+You can download a zip of this exercise [here](https://github.com/udacity/ud843-QuakeReport/archive/2.03-Exercise-ParameterMap.zip), and a zip of the solution [here](https://github.com/udacity/ud843-QuakeReport/archive/2.03-Solution-ParameterMap.zip). Also, you can find a visual summary of the solution [here](https://github.com/udacity/ud843-QuakeReport/compare/2.03-Exercise-ParameterMap...2.03-Solution-ParameterMap).
+
