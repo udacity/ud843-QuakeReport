@@ -26,7 +26,7 @@ A `BufferedReader` behaves more like a cache: https://en.wikipedia.org/wiki/Cach
 
 More info about `BufferedReader` can be found here: http://developer.android.com/reference/java/io/BufferedReader.html
 
-### Side Sote: WHY?!?!
+### Side Note: WHY?!?!
 
 An `InputStream` wrapped in an `InputStreamReader` wrapped in a `BufferedReader`?! Surely there must be a simpler way to read data back from an `HttpURLConnection`. Indeed, a `readTheWholeResponseAsText()` method would be pretty convenient. The problem, though, is that that method wouldn't be reusable. Instead of pre-built end-to-end solutions, programming frameworks and libraries usually give you individual parts that can be combined together in many different ways. In this case the chain of streams and readers is kinda long, but in the future you'll encounter situations where you'll need to assemble these pieces in some different configuration. The flexibility you gain is absolutely worth the verbosity you need to endure right now.
 
