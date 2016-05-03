@@ -33,7 +33,7 @@ public class Earthquake {
      * Constructs a new {@link Earthquake} object.
      *
      * @param magnitude is the magnitude (size) of the earthquake
-     * @param location is the city location of the earthquake
+     * @param location is the location where the earthquake happened
      * @param timeInMilliseconds is the time in milliseconds (from the Epoch) when the
      *                           earthquake happened
      */
