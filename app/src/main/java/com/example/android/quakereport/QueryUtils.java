@@ -89,9 +89,12 @@ public final class QueryUtils {
                 // Extract the value for the key called "time"
                 long time = properties.getLong("time");
 
-                // Create a new {@link Earthquake} object with the magnitude, location, and time
-                // from the JSON response.
-                Earthquake earthquake = new Earthquake(magnitude, location, time);
+                // Extract the value for the key called "url"
+                String url = properties.getString("url");
+
+                // Create a new {@link Earthquake} object with the magnitude, location, time,
+                // and url from the JSON response.
+                Earthquake earthquake = new Earthquake(magnitude, location, time, url);
 
                 // Add the new {@link Earthquake} to the list of earthquakes.
                 earthquakes.add(earthquake);
