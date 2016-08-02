@@ -35,7 +35,7 @@
         android:layout_centerInParent="true"
         android:textAppearance="?android:textAppearanceMedium"/>
 
-    <!-- Loading indicator is only shown before the first load -->
+    <!-- Loading indicator for user feedback between queries to USGS -->
     <ProgressBar
         android:id="@+id/loading_indicator"
         style="@style/Widget.AppCompat.ProgressBar"
