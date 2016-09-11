@@ -30,15 +30,14 @@ public class EarthquakeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
 
-        ArrayList<EarthquakeEvent> earthquakeEvents = new ArrayList<>();
-        earthquakeEvents.add(new EarthquakeEvent(1.5, "San Francisco", "Jan 14, 1980"));
-        earthquakeEvents.add(new EarthquakeEvent(2.5, "Los Angeles", "Jan 17, 1978"));
-        earthquakeEvents.add(new EarthquakeEvent(3.5, "Seattle", "Feb 14, 1992"));
-        earthquakeEvents.add(new EarthquakeEvent(4.5, "San Francisco", "March 15, 1965"));
+        // get list of earthquakes from QueryUtils class
+        ArrayList<EarthquakeEvent> earthquakeEvents = QueryUtils.extractEarthquakes();
 
+        // displays ArrayList of earthquakeEvents with a ListAdapter
         EarthquakeListAdapter earthquakeListAdapter = new EarthquakeListAdapter(this, earthquakeEvents);
         ListView listView = (ListView) findViewById(R.id.container);
 
+        // if the listView is not null, set the adapter
         assert listView != null;
         listView.setAdapter(earthquakeListAdapter);
     }
