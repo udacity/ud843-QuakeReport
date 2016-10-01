@@ -22,4 +22,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="PlaceTextStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

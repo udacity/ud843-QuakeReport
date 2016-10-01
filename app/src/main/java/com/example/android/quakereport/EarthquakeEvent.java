@@ -8,11 +8,15 @@ public class EarthquakeEvent {
     private double mMagnitude;
     private String mLocation;
     private String mDate;
+    private String mTime;
+    private String mURL;
 
-    public EarthquakeEvent(double mag, String loc, String date) {
+    public EarthquakeEvent(double mag, String loc, String date, String time, String url) {
         mMagnitude = mag;
         mLocation = loc;
         mDate = date;
+        mTime = time;
+        mURL = url;
     }
 
     public double getmMagnitude() {
@@ -38,6 +42,23 @@ public class EarthquakeEvent {
     public void setmDate(String mDate) {
         this.mDate = mDate;
     }
+
+    public String getmTime() {
+        return mTime;
+    }
+
+    public void setmTime(String mTime) {
+        this.mTime = mTime;
+    }
+
+    public String getmURL() {
+        return mURL;
+    }
+
+    public void setmURL(String mURL) {
+        this.mURL = mURL;
+    }
+
 
     @Override
     public String toString() {
