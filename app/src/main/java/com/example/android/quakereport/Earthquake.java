@@ -7,24 +7,29 @@ import android.location.Location;
  */
 
 public class Earthquake {
-    private String mMagnitude;
+    private double mMagnitude;
     private String mLocation;
-    private String mTime;
+    private long mMilliSeconds;
+    private String murl;
 
-    public Earthquake(String magnitude, String Location, String  time){
+    public Earthquake(double magnitude, String Location, long  time,String url){
+        murl=url;
         mMagnitude=magnitude;
         mLocation=Location;
-        mTime=time;
+        mMilliSeconds=time;
     }
 
-    public String getMagnitude(){
+    public double getMagnitude(){
         return mMagnitude;
     }
     public String getLocation(){
         return mLocation;
     }
 
-    public String getTime(){
-        return mTime;
+    public long getTime(){
+        return mMilliSeconds;
+    }
+    public String geturl(){
+        return murl;
     }
 }
