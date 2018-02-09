@@ -134,12 +134,13 @@ public class EarthquakeActivity extends AppCompatActivity
         mEmptyStateTextView.setText(R.string.no_earthquakes);
 
         // Clear the adapter of previous earthquake data
-        mAdapter.clear();
+        //mAdapter.clear();
 
         // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (earthquakes != null && !earthquakes.isEmpty()) {
-            mAdapter.addAll(earthquakes);
+            //mAdapter.addAll(earthquakes);
+            updateUi(earthquakes);
         }
     }
 
