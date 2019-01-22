@@ -1,4 +1,4 @@
-Quake Report App
+Quake Report App [![Travis Build Status](https://travis-ci.org/udacity/ud843-QuakeReport.svg?branch=master)](https://travis-ci.org/udacity/ud843-QuakeReport)
 ===================================
 
 This app displays a list of recent earthquakes in the world
