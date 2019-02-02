@@ -59,6 +59,7 @@ public final class QueryUtils {
                 String mag = properties.optString("mag");
                 String loc = properties.optString("place");
                 String time = properties.optString("time");
+                String url = properties.optString("url");
 
                 // using an inbuilt date class to take care of the unix time
                 long time_milisecs = Long.parseLong(time);
@@ -74,7 +75,7 @@ public final class QueryUtils {
                 String timeToDisplay = timeFormat.format(date);
 
 
-                earthquakes.add(new Earthquake(mag,loc,dateToDisplay,timeToDisplay));
+                earthquakes.add(new Earthquake(mag,loc,dateToDisplay,timeToDisplay,url));
             }
 
         } catch (JSONException e) {

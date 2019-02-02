@@ -6,6 +6,7 @@ public class Earthquake {
     String location;
     String date;
     String time;
+    String url;
 
     public String getDate() {
         return date;
@@ -16,12 +17,20 @@ public class Earthquake {
     }
 
 
+    public String getUrl() {
+        return url;
+    }
 
-    Earthquake(String mag, String loc, String date, String time){
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    Earthquake(String mag, String loc, String date, String time, String url){
         this.mag = mag;
         this.location = loc;
         this.date = date;
         this.time =time;
+        this.url = url;
     }
 
     public String getMag() {
