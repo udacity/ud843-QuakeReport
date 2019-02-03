@@ -40,7 +40,7 @@ class earthquake_arrayAdpater extends ArrayAdapter<Earthquake>{
              _place= location.substring(index + 4, location.length());
         }
         else{
-            _loc = "Near";
+            _loc = "Near the";
             _place = location;
         }
 
