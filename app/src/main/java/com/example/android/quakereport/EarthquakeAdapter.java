@@ -16,6 +16,7 @@ import java.util.Date;
 public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
     private static final String TAG = "EarthquakeAdapter";
+    private static final String LOCATION_SEPARATOR = " of ";
 
     public EarthquakeAdapter(Activity context, ArrayList<Earthquake> earthquakes) {
         super(context, 0, earthquakes);
@@ -41,14 +42,14 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         TextView offsetView = listItemView.findViewById(R.id.offset);
         TextView locationView = listItemView.findViewById(R.id.location);
 
-        if (locationString.contains(" of ")) {
+        if (locationString.contains(LOCATION_SEPARATOR)) {
             // split string into two parts
-            String[] split = locationString.split("of");
-            offsetView.setText(split[0] + " of ");
+            String[] split = locationString.split(LOCATION_SEPARATOR);
+            offsetView.setText(split[0] + LOCATION_SEPARATOR);
             locationView.setText(split[1]);
 
         } else {
-            offsetView.setText("Near the ");
+            offsetView.setText(R.string.near_the);
             locationView.setText(locationString);
         }
 
