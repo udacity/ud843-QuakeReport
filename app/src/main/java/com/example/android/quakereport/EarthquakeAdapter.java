@@ -1,6 +1,7 @@
 package com.example.android.quakereport;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
+
+    private static final String TAG = "EarthquakeAdapter";
 
     public EarthquakeAdapter(Activity context, ArrayList<Earthquake> earthquakes) {
         super(context, 0, earthquakes);
@@ -32,8 +35,23 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         TextView magnitude = listItemView.findViewById(R.id.magnitude);
         magnitude.setText(currentEarthquake.getMagnitude());
 
-        TextView location = listItemView.findViewById(R.id.location);
-        location.setText(currentEarthquake.getLocation());
+
+
+        String locationString = currentEarthquake.getLocation();
+        TextView offsetView = listItemView.findViewById(R.id.offset);
+        TextView locationView = listItemView.findViewById(R.id.location);
+
+        if (locationString.contains(" of ")) {
+            // split string into two parts
+            String[] split = locationString.split("of");
+            offsetView.setText(split[0] + " of ");
+            locationView.setText(split[1]);
+
+        } else {
+            offsetView.setText("Near the ");
+            locationView.setText(locationString);
+        }
+
 
         long timeInMilliseconds = currentEarthquake.getTimeInMilliseconds();
         Date dateObject = new Date(timeInMilliseconds);
@@ -48,6 +66,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
         return listItemView;
     }
+
 
     private String formatDate(Date dateObject) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM DD, yyyy");
