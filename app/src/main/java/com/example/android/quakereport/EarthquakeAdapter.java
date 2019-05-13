@@ -1,21 +1,19 @@
 package com.example.android.quakereport;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.text.Format;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
-    private static final String TAG = "EarthquakeAdapter";
     private static final String LOCATION_SEPARATOR = " of ";
 
     public EarthquakeAdapter(Activity context, ArrayList<Earthquake> earthquakes) {
@@ -33,10 +31,9 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
         Earthquake currentEarthquake = getItem(position);
 
-        TextView magnitude = listItemView.findViewById(R.id.magnitude);
-        magnitude.setText(currentEarthquake.getMagnitude());
-
-
+        TextView magnitudeView = listItemView.findViewById(R.id.magnitude);
+        double magnitude = currentEarthquake.getMagnitude();
+        magnitudeView.setText(formatMagnitude(magnitude));
 
         String locationString = currentEarthquake.getLocation();
         TextView offsetView = listItemView.findViewById(R.id.offset);
@@ -66,6 +63,11 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         time.setText(formatTime(dateObject));
 
         return listItemView;
+    }
+
+    private String formatMagnitude(double magnitude) {
+        DecimalFormat magFormat = new DecimalFormat("0.0");
+        return magFormat.format(magnitude);
     }
 
 
