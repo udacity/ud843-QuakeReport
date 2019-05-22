@@ -54,8 +54,9 @@ public class QueryUtils {
                 //This is when we are traversing in the each array elements
                 JSONObject eachEarthQuakeMap = earthquakeJsonFeatures.getJSONObject(i).getJSONObject("properties");
                 String place = eachEarthQuakeMap.getString("place");
-                String Mag = eachEarthQuakeMap.getString("mag");
-                String time = eachEarthQuakeMap.getString("time");
+                double Mag = eachEarthQuakeMap.getDouble("mag");
+                long time = eachEarthQuakeMap.getLong("time");
+
                 earthquakes.add(new earthquake_data_list(Mag,place,time));
             }
 

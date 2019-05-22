@@ -1,17 +1,17 @@
 package com.example.android.quakereport;
 
 public class earthquake_data_list {
-   private String mMagniture;
+   private double mMagniture;
    private String mPlace;
-   private String mDate;
+   private long mInMilliSeconds;
 
-   public earthquake_data_list(String vMagnitude, String vPlace, String vDate){
+   public earthquake_data_list(double vMagnitude, String vPlace, long vDate){
        mMagniture = vMagnitude;
        mPlace = vPlace;
-       mDate=vDate;
+       mInMilliSeconds=vDate;
    }
 
-   public String getMagnitude(){
+   public double getMagnitude(){
      return mMagniture;
    }
 
@@ -19,7 +19,7 @@ public class earthquake_data_list {
         return mPlace;
     }
 
-    public String getDate(){
-        return mDate;
+    public long getDate(){
+        return mInMilliSeconds;
     }
 }
