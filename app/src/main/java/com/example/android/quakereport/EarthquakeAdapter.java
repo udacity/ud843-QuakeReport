@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
-    private static final String TAG = "EarthquakeAdapter";
     private static final String LOCATION_SEPARATOR = " of ";
 
     public EarthquakeAdapter(Activity context, ArrayList<Earthquake> earthquakes) {
@@ -45,7 +44,6 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
         // Get the appropriate background color based on the current earthquake magnitude
         int magnitudeColor = getMagnitudeColor(currentEarthquake.getMagnitude());
-        Log.d(TAG, "getView: " + String.format("%.2f, #%x",magnitude, magnitudeColor));
 
         // Set the color on the magnitude circle
         magnitudeCircle.setColor(magnitudeColor);
