@@ -15,4 +15,14 @@
 -->
 <resources>
     <string name="app_name">Quake Report</string>
+
+    <string name="mag1">7.2</string>
+    <string name="mag2">6.2</string>
+    <string name="mag3">3.5</string>
+    <string name="mag4">4.1</string>
+    <string name="mag5">5.6</string>
+    <string name="mag6">1.2</string>
+    <string name="mag7">2.4</string>
+    <string name="emptyData">No Earthquakes found.</string>
+    <string name="NoConnection">No Internet Connection.</string>
 </resources>
