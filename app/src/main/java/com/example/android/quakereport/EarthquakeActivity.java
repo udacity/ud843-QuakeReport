@@ -26,7 +26,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -187,8 +187,8 @@ public class EarthquakeActivity extends AppCompatActivity
         // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (earthquakes != null && !earthquakes.isEmpty()) {
-            //mAdapter.addAll(earthquakes);
-            updateUi(earthquakes);
+            mAdapter.addAll(earthquakes);
+            //updateUi(earthquakes);
         }
     }
 
